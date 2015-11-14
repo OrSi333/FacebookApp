@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Facebook;
+using FacebookWrapper;
 
 namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 {
@@ -19,9 +21,32 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string s_AppId = "1687163321527087";
+
         public MainWindow()
         {
             InitializeComponent();
         }
+
+        private void buttonLogin_Click(object sender, RoutedEventArgs e)
+        {
+            LoginResult result = FacebookService.Login(s_AppId, m_UserPermitions);
+            if (!string.IsNullOrEmpty(result.AccessToken))
+            {
+                //Add a check that the user aprooved all permitions
+                m_LoggedInUser = result.LoggedInUser;
+                fetchUserInfo();
+                m_IsLoggedIn = true;
+                updateAllInfo();
+                enableUIButtons();
+
+            }
+            else
+            {
+                MessageBox.Show(result.ErrorMessage);
+            }
+
+        }
+        
     }
 }
