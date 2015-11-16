@@ -16,6 +16,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
     {
         User m_LoggedInUser;
         private const string m_AppId = "1687163321527087";
+
         //Fields regarding status
         private const string m_StatusDefaultMessage = "What's on your mind?";
         
@@ -117,6 +118,58 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         {
 
         }
+
+        private void m_ShowTags_Click(object sender, EventArgs e)
+        {
+
+            dataGridViewFriends.Rows.Clear();
+            dataGridViewFriends.Tag = "Photos";
+            dataGridViewFriends.Columns[1].HeaderText = "Shared Photos";
+            dataGridViewFriends.Columns[2].Visible = false;
+            
+            Dictionary<string, Features.UserRank<Photo>> allUsersWithTagsOnPhotos = Features.FetchTags(m_LoggedInUser);
+            foreach (Features.UserRank<Photo> userDetails in allUsersWithTagsOnPhotos.Values)
+            {
+                int index = dataGridViewFriends.Rows.Add(userDetails.Name, userDetails.GetObjectCount(), userDetails);
+                dataGridViewFriends.Rows[index].ReadOnly = true;
+                
+                
+            }
+
+            System.Console.Write("test");
+
+        }
+
+        private void dataGridViewFriends_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.RowIndex > -1)
+            {
+                DataGridView senderDataGridView = (DataGridView)sender;
+                if (senderDataGridView.Tag.Equals("Photos"))
+                {
+                    Features.UserRank<Photo> userInfo = (Features.UserRank<Photo>)senderDataGridView.Rows[e.RowIndex].Cells[2].Value;
+                    ImagesForm userSharedTaggedImagesForm = new ImagesForm();
+                    userSharedTaggedImagesForm.Text = userInfo.Name + " Shared Photos";
+                    foreach (Photo photo in userInfo.GetObjectList())
+                    {
+                        userSharedTaggedImagesForm.AddImageToGrid(photo);
+                    }
+                    userSharedTaggedImagesForm.Show();
+                }
+                    
+            
+            }
+            
+        }
+
+
+        private void m_FetchEventFriends_Click(object sender, EventArgs e)
+        {
+            Features.FetchEvents(m_LoggedInUser);
+        }
+
+
 
     }
 }
