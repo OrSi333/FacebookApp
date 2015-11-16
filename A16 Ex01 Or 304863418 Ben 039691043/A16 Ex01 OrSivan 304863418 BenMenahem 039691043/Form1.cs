@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Facebook;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
+using System.Threading;
 
 namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 {
@@ -19,8 +20,8 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         //Fields regarding status
         private const string m_StatusDefaultMessage = "What's on your mind?";
-        
-        
+        //Fields regarding event window
+        private EventForm m_selectedEventForm = null;
 
         public Form1()
         {
@@ -80,12 +81,14 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             {
                 m_LoggedInUser = result.LoggedInUser;
                 fetchUserInfo();
+                doAfterLogin();
             }
             else
             {
                 MessageBox.Show(result.ErrorMessage);
             }
         }
+
 
         private void fetchUserInfo()
         {
@@ -109,14 +112,19 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             textBoxStatus.Text = m_StatusDefaultMessage;
         }
 
-        private void pictureBoxProfile_Click(object sender, EventArgs e)
+        private void doAfterLogin()
         {
-
-        }
-
-        private void textBoxStatus_TextChanged(object sender, EventArgs e)
-        {
-
+            tabControlFBFeatures.Enabled = true;
+            FacebookObjectCollection<Event> ueEv = m_LoggedInUser.EventsNotYetReplied;
+            listBoxUndecidedEvents.DisplayMember = "Name";
+            foreach(Event currentEvent in ueEv)
+            {
+                listBoxUndecidedEvents.Items.Add(currentEvent);
+            }
+            if (ueEv.Count == 0)
+            {
+                MessageBox.Show("No Events to retrieve :(");
+            }
         }
 
         private void m_ShowTags_Click(object sender, EventArgs e)
@@ -166,7 +174,31 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         private void m_FetchEventFriends_Click(object sender, EventArgs e)
         {
+            FormLoadingScreen load = new FormLoadingScreen();
+            load.Show();
             Features.FetchEvents(m_LoggedInUser);
+            load.Close();
+        }
+
+        private void listBoxUndecidedEvents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxUndecidedEvents.SelectedItems.Count == 1)
+            {
+                Event selectedEvent = listBoxUndecidedEvents.SelectedItem as Event;
+                if (m_selectedEventForm != null)
+                {
+                    m_selectedEventForm.Close();
+                }
+                m_selectedEventForm = new EventForm();
+                m_selectedEventForm.loadEvent(selectedEvent, listBoxUndecidedEvents.PointToScreen(listBoxUndecidedEvents.Location));
+                m_selectedEventForm.Show();
+                m_selectedEventForm.FormClosed += resetEventWindow;
+            }
+        }
+
+        private void resetEventWindow(object sender, FormClosedEventArgs e)
+        {
+            m_selectedEventForm = null;
         }
 
 
