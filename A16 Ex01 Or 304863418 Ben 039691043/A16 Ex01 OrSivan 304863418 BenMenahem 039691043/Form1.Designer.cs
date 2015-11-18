@@ -140,6 +140,7 @@
             this.dataGridViewFriends.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewFriends.Size = new System.Drawing.Size(439, 321);
             this.dataGridViewFriends.TabIndex = 2;
+            this.dataGridViewFriends.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFriends_CellDoubleClick);
             // 
             // columnName
             // 
@@ -176,7 +177,6 @@
             this.m_FetchEventFriends.TabIndex = 0;
             this.m_FetchEventFriends.Text = "Show Events";
             this.m_FetchEventFriends.UseVisualStyleBackColor = true;
-            this.m_FetchEventFriends.Click += new System.EventHandler(this.m_FetchEventFriends_Click);
             // 
             // listBoxUndecidedEvents
             // 

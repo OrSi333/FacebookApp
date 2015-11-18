@@ -35,17 +35,20 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             // 
             // imagesFlowLayoutPanel
             // 
+            this.imagesFlowLayoutPanel.AutoScroll = true;
+            this.imagesFlowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.imagesFlowLayoutPanel.Location = new System.Drawing.Point(12, 12);
             this.imagesFlowLayoutPanel.Name = "imagesFlowLayoutPanel";
-            this.imagesFlowLayoutPanel.Size = new System.Drawing.Size(527, 474);
+            this.imagesFlowLayoutPanel.Size = new System.Drawing.Size(746, 522);
             this.imagesFlowLayoutPanel.TabIndex = 1;
             // 
             // ImagesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(551, 498);
+            this.ClientSize = new System.Drawing.Size(770, 546);
             this.Controls.Add(this.imagesFlowLayoutPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ImagesForm";
             this.Text = "ImagesForm";
             this.ResumeLayout(false);
@@ -60,7 +63,24 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         {
             PictureBox currentPhotoBox = new PictureBox();
             currentPhotoBox.Image = i_PhotoToAdd.ImageThumb;
+            currentPhotoBox.Name = i_PhotoToAdd.PictureNormalURL;
+            
+            currentPhotoBox.Click += new System.EventHandler(pictureBox_Click);
             imagesFlowLayoutPanel.Controls.Add(currentPhotoBox);
+        }
+
+        public void SingleImageToShow(string i_ImageURL)
+        {
+            PictureBox singleImageBox = new PictureBox();
+            //this.WindowState = FormWindowState.Maximized;
+            //imagesFlowLayoutPanel.MaximumSize = this.MaximumSize;
+            //imagesFlowLayoutPanel.Size = this.MaximumSize;
+            //singleImageBox.BorderStyle = BorderStyle.Fixed3D;
+            //singleImageBox.MaximumSize = imagesFlowLayoutPanel.Size;
+            //singleImageBox.Size = this.MaximumSize;
+            singleImageBox.Load(i_ImageURL);
+            singleImageBox.SizeMode = PictureBoxSizeMode.AutoSize;
+            imagesFlowLayoutPanel.Controls.Add(singleImageBox);
         }
     }
 }

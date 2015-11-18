@@ -15,5 +15,16 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         {
             InitializeComponent();
         }
+
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+            PictureBox senderPictureBox = (PictureBox)sender;
+            string url = senderPictureBox.Name;
+            ImagesForm bigPictureForm = new ImagesForm();
+            bigPictureForm.SingleImageToShow(url);
+            bigPictureForm.Text = string.Empty;
+            bigPictureForm.Show();
+            
+        }
     }
 }
