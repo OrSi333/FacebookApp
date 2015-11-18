@@ -252,8 +252,6 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             }
         }
 
-
-
         private void m_FetchEventFriends_Click(object sender, EventArgs e)
         {
             FBSpecialFeatures.FetchEventFriends_Click(sender, e, m_LoggedInUser, dataGridViewFriends);

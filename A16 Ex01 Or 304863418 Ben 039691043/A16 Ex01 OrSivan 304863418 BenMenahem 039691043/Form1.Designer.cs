@@ -35,6 +35,8 @@
             this.tabControlFBFeatures = new System.Windows.Forms.TabControl();
             this.tabPagePost = new System.Windows.Forms.TabPage();
             this.Wall = new System.Windows.Forms.TabPage();
+            this.buttonWallCommentLike = new System.Windows.Forms.Button();
+            this.pictureBoxWallPost = new System.Windows.Forms.PictureBox();
             this.buttonWallNextPost = new System.Windows.Forms.Button();
             this.buttonWallPreviousPost = new System.Windows.Forms.Button();
             this.textBoxWallWriteComment = new System.Windows.Forms.TextBox();
@@ -43,21 +45,19 @@
             this.listBoxWallComments = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridViewFriends = new System.Windows.Forms.DataGridView();
-            this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnNumberOfShared = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnShowDetails = new System.Windows.Forms.DataGridViewButtonColumn();
             this.m_ShowTags = new System.Windows.Forms.Button();
             this.m_FetchEventFriends = new System.Windows.Forms.Button();
             this.listBoxUndecidedEvents = new System.Windows.Forms.ListBox();
-            this.pictureBoxWallPost = new System.Windows.Forms.PictureBox();
-            this.buttonWallCommentLike = new System.Windows.Forms.Button();
+            this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnNumberOfShared = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnShowDetails = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.tabControlFBFeatures.SuspendLayout();
             this.tabPagePost.SuspendLayout();
             this.Wall.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWallPost)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFriends)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWallPost)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonLogin
@@ -141,6 +141,24 @@
             this.Wall.Text = "Wall";
             this.Wall.UseVisualStyleBackColor = true;
             // 
+            // buttonWallCommentLike
+            // 
+            this.buttonWallCommentLike.Location = new System.Drawing.Point(379, 245);
+            this.buttonWallCommentLike.Name = "buttonWallCommentLike";
+            this.buttonWallCommentLike.Size = new System.Drawing.Size(60, 30);
+            this.buttonWallCommentLike.TabIndex = 7;
+            this.buttonWallCommentLike.Text = "Like";
+            this.buttonWallCommentLike.UseVisualStyleBackColor = true;
+            this.buttonWallCommentLike.Click += new System.EventHandler(this.buttonWallCommentLike_Click);
+            // 
+            // pictureBoxWallPost
+            // 
+            this.pictureBoxWallPost.Location = new System.Drawing.Point(19, 80);
+            this.pictureBoxWallPost.Name = "pictureBoxWallPost";
+            this.pictureBoxWallPost.Size = new System.Drawing.Size(222, 95);
+            this.pictureBoxWallPost.TabIndex = 6;
+            this.pictureBoxWallPost.TabStop = false;
+            // 
             // buttonWallNextPost
             // 
             this.buttonWallNextPost.Location = new System.Drawing.Point(375, 317);
@@ -205,7 +223,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(451, 362);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Special Features";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // dataGridViewFriends
@@ -218,48 +236,32 @@
             this.columnName,
             this.columnNumberOfShared,
             this.columnShowDetails});
-            this.dataGridViewFriends.Location = new System.Drawing.Point(6, 35);
+            this.dataGridViewFriends.Location = new System.Drawing.Point(6, 67);
             this.dataGridViewFriends.Name = "dataGridViewFriends";
             this.dataGridViewFriends.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewFriends.Size = new System.Drawing.Size(439, 321);
+            this.dataGridViewFriends.Size = new System.Drawing.Size(439, 289);
             this.dataGridViewFriends.TabIndex = 2;
             this.dataGridViewFriends.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFriends_CellDoubleClick);
             // 
-            // columnName
-            // 
-            this.columnName.HeaderText = "Name";
-            this.columnName.Name = "columnName";
-            this.columnName.ReadOnly = true;
-            // 
-            // columnNumberOfShared
-            // 
-            this.columnNumberOfShared.HeaderText = "Number";
-            this.columnNumberOfShared.Name = "columnNumberOfShared";
-            this.columnNumberOfShared.ReadOnly = true;
-            // 
-            // columnShowDetails
-            // 
-            this.columnShowDetails.HeaderText = "Show Me";
-            this.columnShowDetails.Name = "columnShowDetails";
-            // 
             // m_ShowTags
             // 
-            this.m_ShowTags.Location = new System.Drawing.Point(177, 6);
+            this.m_ShowTags.Location = new System.Drawing.Point(6, 6);
             this.m_ShowTags.Name = "m_ShowTags";
-            this.m_ShowTags.Size = new System.Drawing.Size(75, 23);
+            this.m_ShowTags.Size = new System.Drawing.Size(98, 55);
             this.m_ShowTags.TabIndex = 1;
-            this.m_ShowTags.Text = "Show Tags";
+            this.m_ShowTags.Text = "Friends Most Tagged With Me";
             this.m_ShowTags.UseVisualStyleBackColor = true;
             this.m_ShowTags.Click += new System.EventHandler(this.m_ShowTags_Click);
             // 
             // m_FetchEventFriends
             // 
-            this.m_FetchEventFriends.Location = new System.Drawing.Point(6, 6);
+            this.m_FetchEventFriends.Location = new System.Drawing.Point(276, 6);
             this.m_FetchEventFriends.Name = "m_FetchEventFriends";
-            this.m_FetchEventFriends.Size = new System.Drawing.Size(105, 23);
+            this.m_FetchEventFriends.Size = new System.Drawing.Size(106, 55);
             this.m_FetchEventFriends.TabIndex = 0;
-            this.m_FetchEventFriends.Text = "Show Events";
+            this.m_FetchEventFriends.Text = "People Who Go To Same Events As Me";
             this.m_FetchEventFriends.UseVisualStyleBackColor = true;
+            this.m_FetchEventFriends.Click += new System.EventHandler(this.m_FetchEventFriends_Click);
             // 
             // listBoxUndecidedEvents
             // 
@@ -270,23 +272,22 @@
             this.listBoxUndecidedEvents.TabIndex = 5;
             this.listBoxUndecidedEvents.SelectedIndexChanged += new System.EventHandler(this.listBoxUndecidedEvents_SelectedIndexChanged);
             // 
-            // pictureBoxWallPost
+            // columnName
             // 
-            this.pictureBoxWallPost.Location = new System.Drawing.Point(19, 80);
-            this.pictureBoxWallPost.Name = "pictureBoxWallPost";
-            this.pictureBoxWallPost.Size = new System.Drawing.Size(222, 95);
-            this.pictureBoxWallPost.TabIndex = 6;
-            this.pictureBoxWallPost.TabStop = false;
+            this.columnName.HeaderText = "";
+            this.columnName.Name = "columnName";
+            this.columnName.ReadOnly = true;
             // 
-            // buttonWallCommentLike
+            // columnNumberOfShared
             // 
-            this.buttonWallCommentLike.Location = new System.Drawing.Point(379, 245);
-            this.buttonWallCommentLike.Name = "buttonWallCommentLike";
-            this.buttonWallCommentLike.Size = new System.Drawing.Size(60, 30);
-            this.buttonWallCommentLike.TabIndex = 7;
-            this.buttonWallCommentLike.Text = "Like";
-            this.buttonWallCommentLike.UseVisualStyleBackColor = true;
-            this.buttonWallCommentLike.Click += new System.EventHandler(this.buttonWallCommentLike_Click);
+            this.columnNumberOfShared.HeaderText = "";
+            this.columnNumberOfShared.Name = "columnNumberOfShared";
+            this.columnNumberOfShared.ReadOnly = true;
+            // 
+            // columnShowDetails
+            // 
+            this.columnShowDetails.HeaderText = "";
+            this.columnShowDetails.Name = "columnShowDetails";
             // 
             // Form1
             // 
@@ -304,9 +305,9 @@
             this.tabPagePost.PerformLayout();
             this.Wall.ResumeLayout(false);
             this.Wall.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWallPost)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFriends)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWallPost)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -324,9 +325,6 @@
         private System.Windows.Forms.Button m_ShowTags;
         private System.Windows.Forms.Button m_FetchEventFriends;
         private System.Windows.Forms.DataGridView dataGridViewFriends;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnNumberOfShared;
-        private System.Windows.Forms.DataGridViewButtonColumn columnShowDetails;
         private System.Windows.Forms.TabPage Wall;
         private System.Windows.Forms.Button buttonWallNextPost;
         private System.Windows.Forms.Button buttonWallPreviousPost;
@@ -336,6 +334,9 @@
         private System.Windows.Forms.ListBox listBoxWallComments;
         private System.Windows.Forms.PictureBox pictureBoxWallPost;
         private System.Windows.Forms.Button buttonWallCommentLike;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnNumberOfShared;
+        private System.Windows.Forms.DataGridViewButtonColumn columnShowDetails;
  }
 }
 
