@@ -22,6 +22,10 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         private const string m_StatusDefaultMessage = "What's on your mind?";
         //Fields regarding event window
         private EventForm m_selectedEventForm = null;
+        private const string m_likeButtonLabel = "Like";
+        private const string m_unlikeButtonLabel = "Unlike";
+
+        private FacebookObjectCollection<Post> m_wallPosts;
 
         public Form1()
         {
@@ -93,6 +97,45 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         private void fetchUserInfo()
         {
             pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureSqaureURL);
+            m_wallPosts = m_LoggedInUser.WallPosts;
+        }
+
+        private void loadWallPost(Post i_CurrentPost)
+        {
+            bool isPostSupported = false;
+            if (i_CurrentPost.Message != null)
+            {
+                labelWallPost.Text = i_CurrentPost.Message;
+                isPostSupported = true;
+            }
+
+            if (i_CurrentPost.PictureURL != null)
+            {
+                pictureBoxWallPost.LoadAsync(i_CurrentPost.PictureURL);
+                isPostSupported = true;
+            }
+
+            if (i_CurrentPost.Comments != null)
+            {
+                foreach(Comment currentComment in i_CurrentPost.Comments){
+                    if (currentComment.Message != null)
+                    {
+                        listBoxWallComments.Items.Add(string.Format("{0}: {1}",i_CurrentPost.From,i_CurrentPost.Message));
+                    }
+                    else
+                    {
+                        listBoxWallComments.Items.Add(string.Format("{0}: <Unsupported type>", i_CurrentPost.From));
+                    }
+                }
+            }
+
+            if (!isPostSupported){
+                labelWallPost.Text = string.Format("<Post of type {0} are currently not supported>",i_CurrentPost.Type);
+            }
+
+            
+            
+            
         }
 
         private void buttonPostStatus_Click(object sender, EventArgs e)
@@ -193,6 +236,60 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         {
             m_selectedEventForm = null;
         }
+
+        private void buttonWallCommentLike_Click(object sender, EventArgs e)
+        {
+            if (listBoxWallComments.SelectedItems.Count == 1)
+            {
+                try
+                {
+                    Comment currentComment = listBoxWallComments.SelectedItem as Comment;
+                    if (currentComment.LikedByUser)
+                    {
+                        currentComment.Unlike();
+                        buttonWallCommentLike.Text = m_likeButtonLabel;
+                    }
+                    else
+                    {
+                        currentComment.Like();
+                        buttonWallCommentLike.Text = m_unlikeButtonLabel;
+                    }
+                }
+                catch (FacebookOAuthException i_FBOAuthException)
+                {
+                    MessageBox.Show(i_FBOAuthException.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Choose a post to like!");
+            }
+        }
+
+        private void listBoxWallComments_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxWallComments.SelectedItems.Count == 1)
+            {
+                try
+                {
+                    Comment currentComment = listBoxWallComments.SelectedItem as Comment;
+                    if (currentComment.LikedByUser)
+                    {
+                        buttonWallCommentLike.Text = m_unlikeButtonLabel;
+                    }
+                    else
+                    {
+                        buttonWallCommentLike.Text = m_likeButtonLabel;
+                    }
+                }
+                catch (FacebookOAuthException i_FBOAuthException)
+                {
+                    MessageBox.Show(i_FBOAuthException.Message);
+                }
+                
+            }
+        }
+
 
 
     }

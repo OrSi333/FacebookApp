@@ -10,3 +10,15 @@ C:\Data\GitHub\FacebookApp\A16 Ex01 Or 304863418 Ben 039691043\A16 Ex01 OrSivan 
 C:\Data\GitHub\FacebookApp\A16 Ex01 Or 304863418 Ben 039691043\A16 Ex01 OrSivan 304863418 BenMenahem 039691043\bin\Debug\FbGraphApiWrapper.dll
 C:\Data\GitHub\FacebookApp\A16 Ex01 Or 304863418 Ben 039691043\A16 Ex01 OrSivan 304863418 BenMenahem 039691043\obj\Debug\A16 Ex01 OrSivan 304863418 BenMenahem 039691043.exe
 C:\Data\GitHub\FacebookApp\A16 Ex01 Or 304863418 Ben 039691043\A16 Ex01 OrSivan 304863418 BenMenahem 039691043\obj\Debug\A16 Ex01 OrSivan 304863418 BenMenahem 039691043.pdb
+C:\Users\7\DP\FacebookApp\A16 Ex01 Or 304863418 Ben 039691043\A16 Ex01 OrSivan 304863418 BenMenahem 039691043\obj\Debug\A16 Ex01 OrSivan 304863418 BenMenahem 039691043.exe
+C:\Users\7\DP\FacebookApp\A16 Ex01 Or 304863418 Ben 039691043\A16 Ex01 OrSivan 304863418 BenMenahem 039691043\obj\Debug\A16 Ex01 OrSivan 304863418 BenMenahem 039691043.pdb
+C:\Users\7\DP\FacebookApp\A16 Ex01 Or 304863418 Ben 039691043\A16 Ex01 OrSivan 304863418 BenMenahem 039691043\bin\Debug\A16 Ex01 OrSivan 304863418 BenMenahem 039691043.exe
+C:\Users\7\DP\FacebookApp\A16 Ex01 Or 304863418 Ben 039691043\A16 Ex01 OrSivan 304863418 BenMenahem 039691043\bin\Debug\A16 Ex01 OrSivan 304863418 BenMenahem 039691043.pdb
+C:\Users\7\DP\FacebookApp\A16 Ex01 Or 304863418 Ben 039691043\A16 Ex01 OrSivan 304863418 BenMenahem 039691043\bin\Debug\Facebook.dll
+C:\Users\7\DP\FacebookApp\A16 Ex01 Or 304863418 Ben 039691043\A16 Ex01 OrSivan 304863418 BenMenahem 039691043\bin\Debug\FbGraphApiWrapper.dll
+C:\Users\7\DP\FacebookApp\A16 Ex01 Or 304863418 Ben 039691043\A16 Ex01 OrSivan 304863418 BenMenahem 039691043\obj\Debug\A16 Ex01 OrSivan 304863418 BenMenahem 039691043.csprojResolveAssemblyReference.cache
+C:\Users\7\DP\FacebookApp\A16 Ex01 Or 304863418 Ben 039691043\A16 Ex01 OrSivan 304863418 BenMenahem 039691043\obj\Debug\A16_Ex01_OrSivan_304863418_BenMenahem_039691043.EventForm.resources
+C:\Users\7\DP\FacebookApp\A16 Ex01 Or 304863418 Ben 039691043\A16 Ex01 OrSivan 304863418 BenMenahem 039691043\obj\Debug\A16_Ex01_OrSivan_304863418_BenMenahem_039691043.Form1.resources
+C:\Users\7\DP\FacebookApp\A16 Ex01 Or 304863418 Ben 039691043\A16 Ex01 OrSivan 304863418 BenMenahem 039691043\obj\Debug\A16_Ex01_OrSivan_304863418_BenMenahem_039691043.ImagesForm.resources
+C:\Users\7\DP\FacebookApp\A16 Ex01 Or 304863418 Ben 039691043\A16 Ex01 OrSivan 304863418 BenMenahem 039691043\obj\Debug\A16_Ex01_OrSivan_304863418_BenMenahem_039691043.Properties.Resources.resources
+C:\Users\7\DP\FacebookApp\A16 Ex01 Or 304863418 Ben 039691043\A16 Ex01 OrSivan 304863418 BenMenahem 039691043\obj\Debug\A16 Ex01 OrSivan 304863418 BenMenahem 039691043.csproj.GenerateResource.Cache

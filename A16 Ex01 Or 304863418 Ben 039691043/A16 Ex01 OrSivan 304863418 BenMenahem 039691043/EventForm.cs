@@ -23,7 +23,6 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         private void EventForm_Load(object sender, EventArgs e)
         {
-            //set dynamic location
         }
 
         internal void loadEvent(Event i_Event, Point i_LoadingLocation)
