@@ -17,6 +17,7 @@
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -34,18 +35,18 @@
             this.buttonPostStatus = new System.Windows.Forms.Button();
             this.tabControlFBFeatures = new System.Windows.Forms.TabControl();
             this.tabPagePost = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.specialFacebookOptions = new System.Windows.Forms.TabPage();
             this.dataGridViewFriends = new System.Windows.Forms.DataGridView();
-            this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnNumberOfShared = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnShowDetails = new System.Windows.Forms.DataGridViewButtonColumn();
             this.m_ShowTags = new System.Windows.Forms.Button();
             this.m_FetchEventFriends = new System.Windows.Forms.Button();
             this.listBoxUndecidedEvents = new System.Windows.Forms.ListBox();
+            this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnNumberOfShared = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnShowDetails = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.tabControlFBFeatures.SuspendLayout();
             this.tabPagePost.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.specialFacebookOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFriends)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,7 +92,7 @@
             // tabControlFBFeatures
             // 
             this.tabControlFBFeatures.Controls.Add(this.tabPagePost);
-            this.tabControlFBFeatures.Controls.Add(this.tabPage2);
+            this.tabControlFBFeatures.Controls.Add(this.specialFacebookOptions);
             this.tabControlFBFeatures.Enabled = false;
             this.tabControlFBFeatures.Location = new System.Drawing.Point(107, 25);
             this.tabControlFBFeatures.Name = "tabControlFBFeatures";
@@ -112,18 +113,18 @@
             this.tabPagePost.Text = "Post";
             this.tabPagePost.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // specialFacebookOptions
             // 
-            this.tabPage2.Controls.Add(this.dataGridViewFriends);
-            this.tabPage2.Controls.Add(this.m_ShowTags);
-            this.tabPage2.Controls.Add(this.m_FetchEventFriends);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(451, 362);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.specialFacebookOptions.Controls.Add(this.dataGridViewFriends);
+            this.specialFacebookOptions.Controls.Add(this.m_ShowTags);
+            this.specialFacebookOptions.Controls.Add(this.m_FetchEventFriends);
+            this.specialFacebookOptions.Location = new System.Drawing.Point(4, 22);
+            this.specialFacebookOptions.Name = "specialFacebookOptions";
+            this.specialFacebookOptions.Padding = new System.Windows.Forms.Padding(3);
+            this.specialFacebookOptions.Size = new System.Drawing.Size(451, 362);
+            this.specialFacebookOptions.TabIndex = 1;
+            this.specialFacebookOptions.Text = "Special Options";
+            this.specialFacebookOptions.UseVisualStyleBackColor = true;
             // 
             // dataGridViewFriends
             // 
@@ -142,41 +143,25 @@
             this.dataGridViewFriends.TabIndex = 2;
             this.dataGridViewFriends.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFriends_CellDoubleClick);
             // 
-            // columnName
-            // 
-            this.columnName.HeaderText = "Name";
-            this.columnName.Name = "columnName";
-            this.columnName.ReadOnly = true;
-            // 
-            // columnNumberOfShared
-            // 
-            this.columnNumberOfShared.HeaderText = "Number";
-            this.columnNumberOfShared.Name = "columnNumberOfShared";
-            this.columnNumberOfShared.ReadOnly = true;
-            // 
-            // columnShowDetails
-            // 
-            this.columnShowDetails.HeaderText = "Show Me";
-            this.columnShowDetails.Name = "columnShowDetails";
-            // 
             // m_ShowTags
             // 
-            this.m_ShowTags.Location = new System.Drawing.Point(177, 6);
+            this.m_ShowTags.Location = new System.Drawing.Point(6, 6);
             this.m_ShowTags.Name = "m_ShowTags";
-            this.m_ShowTags.Size = new System.Drawing.Size(75, 23);
+            this.m_ShowTags.Size = new System.Drawing.Size(133, 23);
             this.m_ShowTags.TabIndex = 1;
-            this.m_ShowTags.Text = "Show Tags";
+            this.m_ShowTags.Text = "Most Tagged With Me";
             this.m_ShowTags.UseVisualStyleBackColor = true;
             this.m_ShowTags.Click += new System.EventHandler(this.m_ShowTags_Click);
             // 
             // m_FetchEventFriends
             // 
-            this.m_FetchEventFriends.Location = new System.Drawing.Point(6, 6);
+            this.m_FetchEventFriends.Location = new System.Drawing.Point(190, 6);
             this.m_FetchEventFriends.Name = "m_FetchEventFriends";
-            this.m_FetchEventFriends.Size = new System.Drawing.Size(105, 23);
+            this.m_FetchEventFriends.Size = new System.Drawing.Size(139, 23);
             this.m_FetchEventFriends.TabIndex = 0;
-            this.m_FetchEventFriends.Text = "Show Events";
+            this.m_FetchEventFriends.Text = "Most Shared Events";
             this.m_FetchEventFriends.UseVisualStyleBackColor = true;
+            this.m_FetchEventFriends.Click += new System.EventHandler(this.m_FetchEventFriends_Click);
             // 
             // listBoxUndecidedEvents
             // 
@@ -186,6 +171,23 @@
             this.listBoxUndecidedEvents.Size = new System.Drawing.Size(237, 108);
             this.listBoxUndecidedEvents.TabIndex = 5;
             this.listBoxUndecidedEvents.SelectedIndexChanged += new System.EventHandler(this.listBoxUndecidedEvents_SelectedIndexChanged);
+            // 
+            // columnName
+            // 
+            this.columnName.HeaderText = string.Empty;
+            this.columnName.Name = "columnName";
+            this.columnName.ReadOnly = true;
+            // 
+            // columnNumberOfShared
+            // 
+            this.columnNumberOfShared.HeaderText = string.Empty;
+            this.columnNumberOfShared.Name = "columnNumberOfShared";
+            this.columnNumberOfShared.ReadOnly = true;
+            // 
+            // columnShowDetails
+            // 
+            this.columnShowDetails.HeaderText = string.Empty;
+            this.columnShowDetails.Name = "columnShowDetails";
             // 
             // Form1
             // 
@@ -201,7 +203,7 @@
             this.tabControlFBFeatures.ResumeLayout(false);
             this.tabPagePost.ResumeLayout(false);
             this.tabPagePost.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
+            this.specialFacebookOptions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFriends)).EndInit();
             this.ResumeLayout(false);
 
@@ -215,7 +217,7 @@
         private System.Windows.Forms.Button buttonPostStatus;
         private System.Windows.Forms.TabControl tabControlFBFeatures;
         private System.Windows.Forms.TabPage tabPagePost;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage specialFacebookOptions;
         private System.Windows.Forms.ListBox listBoxUndecidedEvents;
         private System.Windows.Forms.Button m_ShowTags;
         private System.Windows.Forms.Button m_FetchEventFriends;
@@ -223,7 +225,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnNumberOfShared;
         private System.Windows.Forms.DataGridViewButtonColumn columnShowDetails;
-
     }
 }
-

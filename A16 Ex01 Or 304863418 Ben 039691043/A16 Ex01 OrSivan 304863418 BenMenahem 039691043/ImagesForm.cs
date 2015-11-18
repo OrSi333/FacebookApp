@@ -24,7 +24,6 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             bigPictureForm.SingleImageToShow(url);
             bigPictureForm.Text = string.Empty;
             bigPictureForm.Show();
-            
         }
     }
 }

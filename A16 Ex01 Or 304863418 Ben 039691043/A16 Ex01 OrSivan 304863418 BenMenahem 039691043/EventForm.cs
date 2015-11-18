@@ -23,7 +23,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         private void EventForm_Load(object sender, EventArgs e)
         {
-            //set dynamic location
+            // set dynamic location
         }
 
         internal void loadEvent(Event i_Event, Point i_LoadingLocation)
@@ -33,7 +33,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             labelEventName.Text = i_Event.Name;
             labelEventDate.Text = i_Event.TimeString;
             labelHostName.Text = i_Event.Owner.Name;
-            Point showLocation = new Point(i_LoadingLocation.X - 2*Size.Width, i_LoadingLocation.Y);
+            Point showLocation = new Point(i_LoadingLocation.X - 2 * Size.Width, i_LoadingLocation.Y);
             Location = showLocation;
         }
 
@@ -54,8 +54,5 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             m_Event.Respond(Event.eRsvpType.Declined);
             this.Close();
         }
-
-
-
     }
 }
