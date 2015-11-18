@@ -1,5 +1,6 @@
-﻿using FacebookWrapper.ObjectModel;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using FacebookWrapper.ObjectModel;
+
 namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 {
     partial class ImagesForm
@@ -19,6 +20,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -72,12 +74,6 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         public void SingleImageToShow(string i_ImageURL)
         {
             PictureBox singleImageBox = new PictureBox();
-            //this.WindowState = FormWindowState.Maximized;
-            //imagesFlowLayoutPanel.MaximumSize = this.MaximumSize;
-            //imagesFlowLayoutPanel.Size = this.MaximumSize;
-            //singleImageBox.BorderStyle = BorderStyle.Fixed3D;
-            //singleImageBox.MaximumSize = imagesFlowLayoutPanel.Size;
-            //singleImageBox.Size = this.MaximumSize;
             singleImageBox.Load(i_ImageURL);
             singleImageBox.SizeMode = PictureBoxSizeMode.AutoSize;
             imagesFlowLayoutPanel.Controls.Add(singleImageBox);
