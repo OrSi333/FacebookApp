@@ -34,23 +34,22 @@
             this.buttonPostStatus = new System.Windows.Forms.Button();
             this.tabControlFBFeatures = new System.Windows.Forms.TabControl();
             this.tabPagePost = new System.Windows.Forms.TabPage();
+            this.listBoxUndecidedEvents = new System.Windows.Forms.ListBox();
             this.Wall = new System.Windows.Forms.TabPage();
             this.buttonWallCommentLike = new System.Windows.Forms.Button();
+            this.listBoxWallPosts = new System.Windows.Forms.ListBox();
             this.pictureBoxWallPost = new System.Windows.Forms.PictureBox();
-            this.buttonWallNextPost = new System.Windows.Forms.Button();
-            this.buttonWallPreviousPost = new System.Windows.Forms.Button();
             this.textBoxWallWriteComment = new System.Windows.Forms.TextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.labelWallPost = new System.Windows.Forms.Label();
             this.listBoxWallComments = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridViewFriends = new System.Windows.Forms.DataGridView();
-            this.m_ShowTags = new System.Windows.Forms.Button();
-            this.m_FetchEventFriends = new System.Windows.Forms.Button();
-            this.listBoxUndecidedEvents = new System.Windows.Forms.ListBox();
             this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnNumberOfShared = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnShowDetails = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.m_ShowTags = new System.Windows.Forms.Button();
+            this.m_FetchEventFriends = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.tabControlFBFeatures.SuspendLayout();
             this.tabPagePost.SuspendLayout();
@@ -108,78 +107,79 @@
             this.tabControlFBFeatures.Location = new System.Drawing.Point(107, 25);
             this.tabControlFBFeatures.Name = "tabControlFBFeatures";
             this.tabControlFBFeatures.SelectedIndex = 0;
-            this.tabControlFBFeatures.Size = new System.Drawing.Size(459, 388);
+            this.tabControlFBFeatures.Size = new System.Drawing.Size(829, 388);
             this.tabControlFBFeatures.TabIndex = 4;
             // 
             // tabPagePost
             // 
+            this.tabPagePost.Controls.Add(this.listBoxUndecidedEvents);
             this.tabPagePost.Controls.Add(this.buttonPostStatus);
             this.tabPagePost.Controls.Add(this.pictureBoxProfile);
             this.tabPagePost.Controls.Add(this.textBoxStatus);
             this.tabPagePost.Location = new System.Drawing.Point(4, 22);
             this.tabPagePost.Name = "tabPagePost";
             this.tabPagePost.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePost.Size = new System.Drawing.Size(451, 362);
+            this.tabPagePost.Size = new System.Drawing.Size(821, 362);
             this.tabPagePost.TabIndex = 0;
             this.tabPagePost.Text = "Post";
             this.tabPagePost.UseVisualStyleBackColor = true;
             // 
+            // listBoxUndecidedEvents
+            // 
+            this.listBoxUndecidedEvents.FormattingEnabled = true;
+            this.listBoxUndecidedEvents.Location = new System.Drawing.Point(465, 28);
+            this.listBoxUndecidedEvents.Name = "listBoxUndecidedEvents";
+            this.listBoxUndecidedEvents.Size = new System.Drawing.Size(237, 186);
+            this.listBoxUndecidedEvents.TabIndex = 5;
+            this.listBoxUndecidedEvents.SelectedIndexChanged += new System.EventHandler(this.listBoxUndecidedEvents_SelectedIndexChanged);
+            // 
             // Wall
             // 
             this.Wall.Controls.Add(this.buttonWallCommentLike);
+            this.Wall.Controls.Add(this.listBoxWallPosts);
             this.Wall.Controls.Add(this.pictureBoxWallPost);
-            this.Wall.Controls.Add(this.buttonWallNextPost);
-            this.Wall.Controls.Add(this.buttonWallPreviousPost);
             this.Wall.Controls.Add(this.textBoxWallWriteComment);
             this.Wall.Controls.Add(this.linkLabel1);
             this.Wall.Controls.Add(this.labelWallPost);
             this.Wall.Controls.Add(this.listBoxWallComments);
             this.Wall.Location = new System.Drawing.Point(4, 22);
             this.Wall.Name = "Wall";
-            this.Wall.Size = new System.Drawing.Size(451, 362);
+            this.Wall.Size = new System.Drawing.Size(821, 362);
             this.Wall.TabIndex = 2;
             this.Wall.Text = "Wall";
             this.Wall.UseVisualStyleBackColor = true;
             // 
             // buttonWallCommentLike
             // 
-            this.buttonWallCommentLike.Location = new System.Drawing.Point(379, 245);
+            this.buttonWallCommentLike.Location = new System.Drawing.Point(379, 291);
             this.buttonWallCommentLike.Name = "buttonWallCommentLike";
             this.buttonWallCommentLike.Size = new System.Drawing.Size(60, 30);
             this.buttonWallCommentLike.TabIndex = 7;
             this.buttonWallCommentLike.Text = "Like";
             this.buttonWallCommentLike.UseVisualStyleBackColor = true;
+            this.buttonWallCommentLike.Visible = false;
             this.buttonWallCommentLike.Click += new System.EventHandler(this.buttonWallCommentLike_Click);
+            // 
+            // listBoxWallPosts
+            // 
+            this.listBoxWallPosts.FormattingEnabled = true;
+            this.listBoxWallPosts.Location = new System.Drawing.Point(468, 55);
+            this.listBoxWallPosts.Name = "listBoxWallPosts";
+            this.listBoxWallPosts.Size = new System.Drawing.Size(339, 290);
+            this.listBoxWallPosts.TabIndex = 6;
+            this.listBoxWallPosts.SelectedIndexChanged += new System.EventHandler(this.listBoxWallPosts_SelectedIndexChanged);
             // 
             // pictureBoxWallPost
             // 
-            this.pictureBoxWallPost.Location = new System.Drawing.Point(19, 80);
+            this.pictureBoxWallPost.Location = new System.Drawing.Point(19, 126);
             this.pictureBoxWallPost.Name = "pictureBoxWallPost";
             this.pictureBoxWallPost.Size = new System.Drawing.Size(222, 95);
             this.pictureBoxWallPost.TabIndex = 6;
             this.pictureBoxWallPost.TabStop = false;
             // 
-            // buttonWallNextPost
-            // 
-            this.buttonWallNextPost.Location = new System.Drawing.Point(375, 317);
-            this.buttonWallNextPost.Name = "buttonWallNextPost";
-            this.buttonWallNextPost.Size = new System.Drawing.Size(64, 37);
-            this.buttonWallNextPost.TabIndex = 5;
-            this.buttonWallNextPost.Text = "Next Post";
-            this.buttonWallNextPost.UseVisualStyleBackColor = true;
-            // 
-            // buttonWallPreviousPost
-            // 
-            this.buttonWallPreviousPost.Location = new System.Drawing.Point(375, 55);
-            this.buttonWallPreviousPost.Name = "buttonWallPreviousPost";
-            this.buttonWallPreviousPost.Size = new System.Drawing.Size(64, 37);
-            this.buttonWallPreviousPost.TabIndex = 4;
-            this.buttonWallPreviousPost.Text = "Previous Post";
-            this.buttonWallPreviousPost.UseVisualStyleBackColor = true;
-            // 
             // textBoxWallWriteComment
             // 
-            this.textBoxWallWriteComment.Location = new System.Drawing.Point(19, 280);
+            this.textBoxWallWriteComment.Location = new System.Drawing.Point(19, 326);
             this.textBoxWallWriteComment.Name = "textBoxWallWriteComment";
             this.textBoxWallWriteComment.Size = new System.Drawing.Size(292, 20);
             this.textBoxWallWriteComment.TabIndex = 3;
@@ -188,26 +188,26 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(317, 286);
+            this.linkLabel1.Location = new System.Drawing.Point(317, 332);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(28, 13);
             this.linkLabel1.TabIndex = 2;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Post";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // labelWallPost
             // 
-            this.labelWallPost.AutoSize = true;
             this.labelWallPost.Location = new System.Drawing.Point(16, 55);
             this.labelWallPost.Name = "labelWallPost";
-            this.labelWallPost.Size = new System.Drawing.Size(28, 13);
+            this.labelWallPost.Size = new System.Drawing.Size(423, 68);
             this.labelWallPost.TabIndex = 1;
             this.labelWallPost.Text = "Post";
             // 
             // listBoxWallComments
             // 
             this.listBoxWallComments.FormattingEnabled = true;
-            this.listBoxWallComments.Location = new System.Drawing.Point(19, 181);
+            this.listBoxWallComments.Location = new System.Drawing.Point(19, 227);
             this.listBoxWallComments.Name = "listBoxWallComments";
             this.listBoxWallComments.Size = new System.Drawing.Size(353, 95);
             this.listBoxWallComments.TabIndex = 0;
@@ -221,7 +221,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(451, 362);
+            this.tabPage2.Size = new System.Drawing.Size(708, 362);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Special Features";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -243,6 +243,23 @@
             this.dataGridViewFriends.TabIndex = 2;
             this.dataGridViewFriends.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFriends_CellDoubleClick);
             // 
+            // columnName
+            // 
+            this.columnName.HeaderText = "";
+            this.columnName.Name = "columnName";
+            this.columnName.ReadOnly = true;
+            // 
+            // columnNumberOfShared
+            // 
+            this.columnNumberOfShared.HeaderText = "";
+            this.columnNumberOfShared.Name = "columnNumberOfShared";
+            this.columnNumberOfShared.ReadOnly = true;
+            // 
+            // columnShowDetails
+            // 
+            this.columnShowDetails.HeaderText = "";
+            this.columnShowDetails.Name = "columnShowDetails";
+            // 
             // m_ShowTags
             // 
             this.m_ShowTags.Location = new System.Drawing.Point(6, 6);
@@ -263,38 +280,11 @@
             this.m_FetchEventFriends.UseVisualStyleBackColor = true;
             this.m_FetchEventFriends.Click += new System.EventHandler(this.m_FetchEventFriends_Click);
             // 
-            // listBoxUndecidedEvents
-            // 
-            this.listBoxUndecidedEvents.FormattingEnabled = true;
-            this.listBoxUndecidedEvents.Location = new System.Drawing.Point(586, 47);
-            this.listBoxUndecidedEvents.Name = "listBoxUndecidedEvents";
-            this.listBoxUndecidedEvents.Size = new System.Drawing.Size(237, 108);
-            this.listBoxUndecidedEvents.TabIndex = 5;
-            this.listBoxUndecidedEvents.SelectedIndexChanged += new System.EventHandler(this.listBoxUndecidedEvents_SelectedIndexChanged);
-            // 
-            // columnName
-            // 
-            this.columnName.HeaderText = "";
-            this.columnName.Name = "columnName";
-            this.columnName.ReadOnly = true;
-            // 
-            // columnNumberOfShared
-            // 
-            this.columnNumberOfShared.HeaderText = "";
-            this.columnNumberOfShared.Name = "columnNumberOfShared";
-            this.columnNumberOfShared.ReadOnly = true;
-            // 
-            // columnShowDetails
-            // 
-            this.columnShowDetails.HeaderText = "";
-            this.columnShowDetails.Name = "columnShowDetails";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(835, 425);
-            this.Controls.Add(this.listBoxUndecidedEvents);
+            this.ClientSize = new System.Drawing.Size(984, 425);
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.tabControlFBFeatures);
             this.Name = "Form1";
@@ -314,29 +304,28 @@
 
         #endregion
 
-        private System.Windows.Forms.Button buttonLogin;
-        private System.Windows.Forms.PictureBox pictureBoxProfile;
-        private System.Windows.Forms.TextBox textBoxStatus;
-        private System.Windows.Forms.Button buttonPostStatus;
         private System.Windows.Forms.TabControl tabControlFBFeatures;
         private System.Windows.Forms.TabPage tabPagePost;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.ListBox listBoxUndecidedEvents;
         private System.Windows.Forms.Button m_ShowTags;
         private System.Windows.Forms.Button m_FetchEventFriends;
         private System.Windows.Forms.DataGridView dataGridViewFriends;
         private System.Windows.Forms.TabPage Wall;
-        private System.Windows.Forms.Button buttonWallNextPost;
-        private System.Windows.Forms.Button buttonWallPreviousPost;
-        private System.Windows.Forms.TextBox textBoxWallWriteComment;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Label labelWallPost;
-        private System.Windows.Forms.ListBox listBoxWallComments;
-        private System.Windows.Forms.PictureBox pictureBoxWallPost;
-        private System.Windows.Forms.Button buttonWallCommentLike;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnNumberOfShared;
         private System.Windows.Forms.DataGridViewButtonColumn columnShowDetails;
+        internal System.Windows.Forms.Button buttonLogin;
+        internal System.Windows.Forms.PictureBox pictureBoxProfile;
+        internal System.Windows.Forms.TextBox textBoxStatus;
+        internal System.Windows.Forms.Button buttonPostStatus;
+        internal System.Windows.Forms.ListBox listBoxUndecidedEvents;
+        internal System.Windows.Forms.TextBox textBoxWallWriteComment;
+        internal System.Windows.Forms.LinkLabel linkLabel1;
+        internal System.Windows.Forms.Label labelWallPost;
+        internal System.Windows.Forms.ListBox listBoxWallComments;
+        internal System.Windows.Forms.PictureBox pictureBoxWallPost;
+        internal System.Windows.Forms.Button buttonWallCommentLike;
+        internal System.Windows.Forms.ListBox listBoxWallPosts;
  }
 }
 
