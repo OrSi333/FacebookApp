@@ -15,7 +15,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MyFBAppForm());
         }
     }
 }

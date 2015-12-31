@@ -13,24 +13,19 @@ using FacebookWrapper.ObjectModel;
 
 namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 {
-    public partial class Form1 : Form
+    public partial class MyFBAppForm : Form
     {
         private const string m_AppId = "1687163321527087";
-
-        // Fields regarding status
+        private const string k_likeButtonLabel = "Like";
+        private const string k_unlikeButtonLabel = "Unlike";
         private const string m_StatusDefaultMessage = "What's on your mind?";
 
-        // User
-        User m_LoggedInUser;
-        
-        // Fields regarding event window
+        private User m_LoggedInUser;
         private EventForm m_selectedEventForm = null;
-        private const string m_likeButtonLabel = "Like";
-        private const string m_unlikeButtonLabel = "Unlike";
 
         private Post CurrentPost { get; set; }
 
-        public Form1()
+        public MyFBAppForm()
         {
             InitializeComponent();
         }
@@ -91,9 +86,8 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         private void fetchUserInfo()
         {
-            pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureSqaureURL);
+            PictureBoxProfile.LoadAsync(m_LoggedInUser.PictureSqaureURL);
             fetchWallPosts();
-
         }
 
         private void fetchWallPosts()
@@ -113,8 +107,9 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
                 {
                     postDisplayedMessage = string.Format("[{0}]", currentPost.Type);
                 }
+
                 postDisplayedMessage = string.Format("{0}: {1}", currentPost.From.Name, postDisplayedMessage);
-                listBoxWallPosts.Items.Add(postDisplayedMessage);
+                ListBoxWallPosts.Items.Add(postDisplayedMessage);
             }
         }
 
@@ -123,46 +118,43 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             bool isPostSupported = false;
             if (i_CurrentPost.Message != null)
             {
-                labelWallPost.Text = i_CurrentPost.Message;
+                LabelWallPost.Text = i_CurrentPost.Message;
                 isPostSupported = true;
             }
 
             if (i_CurrentPost.PictureURL != null)
             {
-                pictureBoxWallPost.LoadAsync(i_CurrentPost.PictureURL);
+                PictureBoxWallPost.LoadAsync(i_CurrentPost.PictureURL);
                 isPostSupported = true;
             }
 
             if (i_CurrentPost.Comments != null)
             {
-                foreach(Comment currentComment in i_CurrentPost.Comments){
+                foreach(Comment currentComment in i_CurrentPost.Comments) 
+                {
                     if (currentComment.Message != null)
                     {
-                        listBoxWallComments.Items.Add(string.Format("{0}: {1}", currentComment.From.Name, currentComment.Message));
+                        ListBoxWallComments.Items.Add(string.Format("{0}: {1}", currentComment.From.Name, currentComment.Message));
                     }
                     else
                     {
-                        listBoxWallComments.Items.Add(string.Format("{0}: <Unsupported type>", currentComment.From.Name));
+                        ListBoxWallComments.Items.Add(string.Format("{0}: <Unsupported type>", currentComment.From.Name));
                     }
                 }
             }
 
-            if (!isPostSupported){
-                labelWallPost.Text = string.Format("<Post of type {0} are currently not supported>",i_CurrentPost.Type);
+            if (!isPostSupported)
+            {
+                LabelWallPost.Text = string.Format("<Post of type {0} are currently not supported>", i_CurrentPost.Type);
             }
-
-            
-            
-            
         }
 
         private void clearWallPost()
         {
-            labelWallPost.Text = string.Empty;
-            pictureBoxWallPost.Image = null;
-            listBoxWallComments.Items.Clear();
-            buttonWallCommentLike.Visible = false;
-
+            LabelWallPost.Text = string.Empty;
+            PictureBoxWallPost.Image = null;
+            ListBoxWallComments.Items.Clear();
+            ButtonWallCommentLike.Visible = false;
         }
 
         private void buttonPostStatus_Click(object sender, EventArgs e)
@@ -170,7 +162,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             Status postedStatus = null;
             try
             {
-                postedStatus = m_LoggedInUser.PostStatus(textBoxStatus.Text, null, "c:/arik.jpg");
+                postedStatus = m_LoggedInUser.PostStatus(TextBoxStatus.Text, null);
             }
             catch (FacebookOAuthException i_FBException)
             {
@@ -179,7 +171,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             }
             
             MessageBox.Show("Status Posted! ID: " + postedStatus.Id);
-            textBoxStatus.Text = m_StatusDefaultMessage;
+            TextBoxStatus.Text = m_StatusDefaultMessage;
         }
 
         private void doAfterLogin()
@@ -187,10 +179,10 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             tabControlFBFeatures.Enabled = true;
             
             FacebookObjectCollection<Event> ueEv = m_LoggedInUser.EventsNotYetReplied;
-            listBoxUndecidedEvents.DisplayMember = "Name";
+            ListBoxUndecidedEvents.DisplayMember = "Name";
             foreach(Event currentEvent in ueEv)
             {
-                listBoxUndecidedEvents.Items.Add(currentEvent);
+                ListBoxUndecidedEvents.Items.Add(currentEvent);
             }
 
             if (ueEv.Count == 0)
@@ -211,16 +203,16 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         private void listBoxUndecidedEvents_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBoxUndecidedEvents.SelectedItems.Count == 1)
+            if (ListBoxUndecidedEvents.SelectedItems.Count == 1)
             {
-                Event selectedEvent = listBoxUndecidedEvents.SelectedItem as Event;
+                Event selectedEvent = ListBoxUndecidedEvents.SelectedItem as Event;
                 if (m_selectedEventForm != null)
                 {
                     m_selectedEventForm.Close();
                 }
 
                 m_selectedEventForm = new EventForm();
-                m_selectedEventForm.loadEvent(selectedEvent, listBoxUndecidedEvents.PointToScreen(listBoxUndecidedEvents.Location));
+                m_selectedEventForm.loadEvent(selectedEvent, ListBoxUndecidedEvents.PointToScreen(ListBoxUndecidedEvents.Location));
                 m_selectedEventForm.Show();
                 m_selectedEventForm.FormClosed += resetEventWindow;
             }
@@ -233,20 +225,20 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         private void buttonWallCommentLike_Click(object sender, EventArgs e)
         {
-            if (listBoxWallComments.SelectedItems.Count == 1)
+            if (ListBoxWallComments.SelectedItems.Count == 1)
             {
                 try
                 {
-                    Comment currentComment = m_LoggedInUser.WallPosts[listBoxWallPosts.SelectedIndex].Comments[listBoxWallComments.SelectedIndex];
+                    Comment currentComment = m_LoggedInUser.WallPosts[ListBoxWallPosts.SelectedIndex].Comments[ListBoxWallComments.SelectedIndex];
                     if (currentComment.LikedByUser)
                     {
                         currentComment.Unlike();
-                        buttonWallCommentLike.Text = m_likeButtonLabel;
+                        ButtonWallCommentLike.Text = k_likeButtonLabel;
                     }
                     else
                     {
                         currentComment.Like();
-                        buttonWallCommentLike.Text = m_unlikeButtonLabel;
+                        ButtonWallCommentLike.Text = k_unlikeButtonLabel;
                     }
                 }
                 catch (FacebookOAuthException i_FBOAuthException)
@@ -262,30 +254,30 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         private void listBoxWallComments_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBoxWallComments.SelectedItems.Count == 1)
+            if (ListBoxWallComments.SelectedItems.Count == 1)
             {
                 try
                 {
-                    Comment currentComment = m_LoggedInUser.WallPosts[listBoxWallPosts.SelectedIndex].Comments[listBoxWallComments.SelectedIndex];
+                    Comment currentComment = m_LoggedInUser.WallPosts[ListBoxWallPosts.SelectedIndex].Comments[ListBoxWallComments.SelectedIndex];
                     if (currentComment.LikedByUser)
                     {
-                        buttonWallCommentLike.Text = m_unlikeButtonLabel;
+                        ButtonWallCommentLike.Text = k_unlikeButtonLabel;
                     }
                     else
                     {
-                        buttonWallCommentLike.Text = m_likeButtonLabel;
+                        ButtonWallCommentLike.Text = k_likeButtonLabel;
                     }
-                    buttonWallCommentLike.Visible = true;
+
+                    ButtonWallCommentLike.Visible = true;
                 }
                 catch (FacebookOAuthException i_FBOAuthException)
                 {
                     MessageBox.Show(i_FBOAuthException.Message);
                 }
-                
             }
             else
             {
-                buttonWallCommentLike.Visible = false;
+                ButtonWallCommentLike.Visible = false;
             }
         }
 
@@ -300,7 +292,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             {
                 if (CurrentPost != null)
                 {
-                    CurrentPost.Comment(textBoxWallWriteComment.Text);
+                    CurrentPost.Comment(TextBoxWallWriteComment.Text);
                 }
                 else
                 {
@@ -318,10 +310,10 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             clearWallPost();
             try
             {
-                if (listBoxWallPosts.SelectedItems.Count == 1)
+                if (ListBoxWallPosts.SelectedItems.Count == 1)
                 {
-                    Post currentPost = m_LoggedInUser.WallPosts[listBoxWallPosts.SelectedIndex];
-                    if (currentPost!=null)
+                    Post currentPost = m_LoggedInUser.WallPosts[ListBoxWallPosts.SelectedIndex];
+                    if (currentPost != null)
                     {
                         loadWallPost(currentPost);
                     }
@@ -336,6 +328,5 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
                 MessageBox.Show(i_FBOAuthException.Message);
             }
         }
-
     }
 }

@@ -17,7 +17,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             InitializeComponent();
         }
 
-        internal void SetUserDetails(FBSpecialFeatures.UserRank<Event> i_userRank)
+        internal void SetUserDetails(UserRank<Event> i_userRank)
         {
             userThumbnail.Image = i_userRank.User.ImageNormal;
             foreach (Event sharedEvent in i_userRank.GetObjectList())

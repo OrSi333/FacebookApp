@@ -2,55 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FacebookWrapper.ObjectModel;
-using FacebookWrapper;
 using System.Windows.Forms;
 using System.ComponentModel;
+using FacebookWrapper.ObjectModel;
+using FacebookWrapper;
 
 namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 {
     class FBSpecialFeatures
     {
-        internal class UserRank<T> {
-            public User User { get; private set; }
+        private const string k_NameColumnHeader = "Name";
+        private const string k_SharedEventsColumnHeader = "Number Of Shared Events";
+        private const string k_SharedPhotosColumnHeader = "Number Of Shared Photos";
+        private const string k_PhotosGridTag = "Photos";
+        private const string k_EventsGridTag = "Events";
+        private const int k_NumberOfEventsToFetch = 25;
+        private const int k_NumberOfUsersFromEventsToFetch = 1000;
+        private const int k_NumberOfPhotosToFetch = 500;
+        private const int k_DefaultNumberOfObjectsToFetch = 25;
+        private const int k_MinimunNumberOfSharedEventsToShow = 3;
 
-            public string Id { get; private set; }
-            
-            public string Name { get; private set; }
-
-            private List<T> m_ObjectsIn;
-
-            public UserRank(User i_User) {
-                User = i_User;
-                Id = i_User.Id;
-                Name = i_User.Name;
-                m_ObjectsIn = new List<T>();
-            }
-
-            public void AddObjectToUser(T i_ObjectToAdd) {
-                if (m_ObjectsIn.IndexOf(i_ObjectToAdd) == -1)
-                {
-                    m_ObjectsIn.Add(i_ObjectToAdd);
-                }
-            }
-
-            public int GetObjectCount()
-            {
-                return m_ObjectsIn.Count;
-            }
-
-            public List<T> GetObjectList()
-            {
-                return m_ObjectsIn;
-            }
-        }
-
-        internal static Dictionary<string, UserRank<Event>> FetchEvents(User i_LoggedInUser)
+        internal static Dictionary<string, UserRank<Event>> FetchAttendeesFromEvents(User i_LoggedInUser)
         {
-            FacebookService.s_CollectionLimit = 25;
+            FacebookService.s_CollectionLimit = k_NumberOfEventsToFetch;
             FacebookObjectCollection<Event> userFacebookEvents = i_LoggedInUser.Events;
             Dictionary<string, UserRank<Event>> allAttendingUsersOnUserEvents = new Dictionary<string, UserRank<Event>>();
-            FacebookService.s_CollectionLimit = 1000;
+            FacebookService.s_CollectionLimit = k_NumberOfUsersFromEventsToFetch;
             foreach (Event userFacebookEvent in userFacebookEvents)
             {
                 if (userFacebookEvent.Privacy == Event.ePrivacy.Open)
@@ -76,7 +53,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
                 UserRank<Event> userRankToCheck;
                 if (allAttendingUsersOnUserEvents.TryGetValue(userToCheck, out userRankToCheck))
                 {
-                    if (userRankToCheck.GetObjectCount() < 3 || userToCheck == i_LoggedInUser.Id)
+                    if (userRankToCheck.GetObjectCount() < k_MinimunNumberOfSharedEventsToShow || userToCheck == i_LoggedInUser.Id)
                     {
                         usersToRemove.Add(userToCheck);
                     }
@@ -87,13 +64,15 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             {
                 allAttendingUsersOnUserEvents.Remove(userToRemove);
             }
+
+            FacebookService.s_CollectionLimit = k_DefaultNumberOfObjectsToFetch;
             
             return allAttendingUsersOnUserEvents;
         }
 
         internal static Dictionary<string, UserRank<Photo>> FetchTags(User i_LoggedInUser)
         {
-            FacebookService.s_CollectionLimit = 500;
+            FacebookService.s_CollectionLimit = k_NumberOfPhotosToFetch;
             FacebookObjectCollection<Photo> userTaggedPhotos = i_LoggedInUser.PhotosTaggedIn;
             Dictionary<string, UserRank<Photo>> allTaggedFriendsOnUserPhotos = new Dictionary<string, UserRank<Photo>>();
             foreach (Photo photo in userTaggedPhotos)
@@ -112,6 +91,8 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
             allTaggedFriendsOnUserPhotos.Remove(i_LoggedInUser.Id);
 
+            FacebookService.s_CollectionLimit = k_DefaultNumberOfObjectsToFetch;
+
             return allTaggedFriendsOnUserPhotos;
         }
 
@@ -120,11 +101,11 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             if (e.RowIndex > -1)
             {
                 DataGridView senderDataGridView = (DataGridView)sender;
-                if (senderDataGridView.Tag.Equals("Photos"))
+                if (senderDataGridView.Tag.Equals(k_PhotosGridTag))
                 {
-                    FBSpecialFeatures.UserRank<Photo> userInfo = (FBSpecialFeatures.UserRank<Photo>)senderDataGridView.Rows[e.RowIndex].Cells[2].Value;
+                    UserRank<Photo> userInfo = (UserRank<Photo>)senderDataGridView.Rows[e.RowIndex].Cells[2].Value;
                     ImagesForm userSharedTaggedImagesForm = new ImagesForm();
-                    userSharedTaggedImagesForm.Text = userInfo.Name + " Shared Photos";
+                    userSharedTaggedImagesForm.Text = string.Format("{0} Shared Photos", userInfo.Name);
                     foreach (Photo photo in userInfo.GetObjectList())
                     {
                         userSharedTaggedImagesForm.AddImageToGrid(photo);
@@ -134,7 +115,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
                 }
                 else
                 {
-                    FBSpecialFeatures.UserRank<Event> userInfo = (FBSpecialFeatures.UserRank<Event>)senderDataGridView.Rows[e.RowIndex].Cells[2].Value;
+                    UserRank<Event> userInfo = (UserRank<Event>)senderDataGridView.Rows[e.RowIndex].Cells[2].Value;
                     UserSharedEventsForm userSharedEventsForm = new UserSharedEventsForm();
                     userSharedEventsForm.Text = userInfo.Name;
                     userSharedEventsForm.SetUserDetails(userInfo);
@@ -146,13 +127,13 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         internal static void ShowTags_Click(object sender, EventArgs e, User i_LoggedInUser, DataGridView i_dataGridViewFriends)
         {
             i_dataGridViewFriends.Rows.Clear();
-            i_dataGridViewFriends.Tag = "Photos";
-            i_dataGridViewFriends.Columns[0].HeaderText = "Name";
-            i_dataGridViewFriends.Columns[1].HeaderText = "Shared Photos";
+            i_dataGridViewFriends.Tag = k_PhotosGridTag;
+            i_dataGridViewFriends.Columns[0].HeaderText = k_NameColumnHeader;
+            i_dataGridViewFriends.Columns[1].HeaderText = k_SharedPhotosColumnHeader;
             i_dataGridViewFriends.Columns[2].Visible = false;
 
-            Dictionary<string, FBSpecialFeatures.UserRank<Photo>> allUsersWithTagsOnPhotos = FBSpecialFeatures.FetchTags(i_LoggedInUser);
-            foreach (FBSpecialFeatures.UserRank<Photo> userDetails in allUsersWithTagsOnPhotos.Values)
+            Dictionary<string, UserRank<Photo>> allUsersWithTagsOnPhotos = FetchTags(i_LoggedInUser);
+            foreach (UserRank<Photo> userDetails in allUsersWithTagsOnPhotos.Values)
             {
                 int index = i_dataGridViewFriends.Rows.Add(userDetails.Name, userDetails.GetObjectCount(), userDetails);
                 i_dataGridViewFriends.Rows[index].ReadOnly = true;
@@ -164,13 +145,13 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         internal static void FetchEventFriends_Click(object sender, EventArgs e, User i_LoggedInUser, DataGridView i_dataGridViewFriends)
         {
             i_dataGridViewFriends.Rows.Clear();
-            i_dataGridViewFriends.Tag = "Events";
-            i_dataGridViewFriends.Columns[0].HeaderText = "Name";
-            i_dataGridViewFriends.Columns[1].HeaderText = "Shared Events";
+            i_dataGridViewFriends.Tag = k_EventsGridTag;
+            i_dataGridViewFriends.Columns[0].HeaderText = k_NameColumnHeader;
+            i_dataGridViewFriends.Columns[1].HeaderText = k_SharedEventsColumnHeader;
             i_dataGridViewFriends.Columns[2].Visible = false;
 
-            Dictionary<string, FBSpecialFeatures.UserRank<Event>> allUsersWithSharedEvents = FBSpecialFeatures.FetchEvents(i_LoggedInUser);
-            foreach (FBSpecialFeatures.UserRank<Event> userDetails in allUsersWithSharedEvents.Values)
+            Dictionary<string, UserRank<Event>> allUsersWithSharedEvents = FetchAttendeesFromEvents(i_LoggedInUser);
+            foreach (UserRank<Event> userDetails in allUsersWithSharedEvents.Values)
             {
                 int index = i_dataGridViewFriends.Rows.Add(userDetails.Name, userDetails.GetObjectCount(), userDetails);
                 i_dataGridViewFriends.Rows[index].ReadOnly = true;
