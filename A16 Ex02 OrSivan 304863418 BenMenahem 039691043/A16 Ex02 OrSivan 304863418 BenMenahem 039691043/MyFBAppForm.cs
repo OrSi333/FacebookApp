@@ -20,6 +20,17 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         private const string k_unlikeButtonLabel = "Unlike";
         private const string m_StatusDefaultMessage = "What's on your mind?";
 
+        private const string k_NameColumnHeader = "Name";
+        private const string k_SharedEventsColumnHeader = "Number Of Shared Events";
+        private const string k_SharedPhotosColumnHeader = "Number Of Shared Photos";
+        private const string k_PhotosGridTag = "Photos";
+        private const string k_EventsGridTag = "Events";
+        private const int k_NumberOfEventsToFetch = 25;
+        private const int k_NumberOfUsersFromEventsToFetch = 1000;
+        private const int k_NumberOfPhotosToFetch = 500;
+        private const int k_DefaultNumberOfObjectsToFetch = 25;
+        private const int k_MinimunNumberOfSharedEventsToShow = 3;
+
         private User m_LoggedInUser;
         private EventForm m_selectedEventForm = null;
 
@@ -193,13 +204,19 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         private void m_ShowTags_Click(object sender, EventArgs e)
         {
-            FBSpecialFeatures.ShowTags_Click(sender, e, m_LoggedInUser, dataGridViewFriends);
+            listBoxFriendsWithRank.Tag = k_PhotosGridTag;
+            listBoxFriendsWithRank.Items.Clear();
+
+            new Thread(createPhotosFriendsListBox).Start();
+            
         }
 
-        private void dataGridViewFriends_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void createPhotosFriendsListBox()
         {
-            FBSpecialFeatures.dataGridViewFriends_CellDoubleClick(sender, e);
+            FBSpecialFeatures.FetchTags(m_LoggedInUser, listBoxFriendsWithRank);
+
         }
+
 
         private void listBoxUndecidedEvents_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -283,7 +300,16 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         private void m_FetchEventFriends_Click(object sender, EventArgs e)
         {
-            FBSpecialFeatures.FetchEventFriends_Click(sender, e, m_LoggedInUser, dataGridViewFriends);
+            listBoxFriendsWithRank.Tag = k_EventsGridTag;
+            listBoxFriendsWithRank.Items.Clear();
+
+            new Thread(createEventFriendsListBox).Start();
+        }
+
+        private void createEventFriendsListBox()
+        {
+            FBSpecialFeatures.FetchAttendees(m_LoggedInUser, listBoxFriendsWithRank);
+
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -328,5 +354,51 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
                 MessageBox.Show(i_FBOAuthException.Message);
             }
         }
+
+        private void listBoxFriendsWithRank_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListBox senderListBox = (ListBox)sender;
+            m_PanelPeopleInSameEvents.Visible = false;
+            m_PanelSharedImagesWithFriend.Visible = false;
+            if (senderListBox.Tag.Equals(k_PhotosGridTag))
+            {
+                UserRank<Photo> userInfo = (UserRank<Photo>)senderListBox.SelectedItem;
+                m_FlowLayoutPanelSharedImages.Controls.Clear();
+                m_PanelSharedImagesWithFriend.Visible = true;
+                foreach (Photo photo in userInfo.GetObjectList())
+                {
+                    PictureBox currentPhotoBox = new PictureBox();
+                    currentPhotoBox.Image = photo.ImageThumb;
+                    currentPhotoBox.Name = photo.PictureNormalURL;
+
+                    currentPhotoBox.Click += new System.EventHandler(pictureBox_Click);
+                    m_FlowLayoutPanelSharedImages.Controls.Add(currentPhotoBox);
+                    m_FlowLayoutPanelSharedImages.Visible = true;
+                }
+            }
+            else
+            {
+                UserRank<Event> userInfo = (UserRank<Event>)senderListBox.SelectedItem;
+                m_PanelPeopleInSameEvents.Visible = true;
+                m_PictureBoxUserFromSharedEvents.Image = userInfo.User.ImageSquare;
+                m_ListBoxSharedEvents.DisplayMember = "Name";
+                m_ListBoxSharedEvents.Items.Clear();
+                foreach (Event sharedEvent in userInfo.GetObjectList())
+                {
+                    m_ListBoxSharedEvents.Items.Add(sharedEvent);
+                }
+            }
+        }
+
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+            PictureBox senderPictureBox = (PictureBox)sender;
+            string url = senderPictureBox.Name;
+            ImagesForm bigPictureForm = new ImagesForm();
+            bigPictureForm.SingleImageToShow(url);
+            bigPictureForm.Text = string.Empty;
+            bigPictureForm.Show();
+        }
+
     }
 }
