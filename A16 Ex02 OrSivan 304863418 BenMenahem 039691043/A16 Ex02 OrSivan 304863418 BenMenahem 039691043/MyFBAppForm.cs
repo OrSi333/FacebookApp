@@ -405,7 +405,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             {
                 UserRank<Event> userInfo = (UserRank<Event>)senderListBox.SelectedItem;
                 m_PanelPeopleInSameEvents.Visible = true;
-                m_PictureBoxUserFromSharedEvents.Image = userInfo.User.ImageSquare;
+                m_PictureBoxUserFromSharedEvents.Image = userInfo.ImageSquare;
                 m_ListBoxSharedEvents.DisplayMember = "Name";
                 m_ListBoxSharedEvents.Items.Clear();
                 foreach (Event sharedEvent in userInfo.GetObjectList())

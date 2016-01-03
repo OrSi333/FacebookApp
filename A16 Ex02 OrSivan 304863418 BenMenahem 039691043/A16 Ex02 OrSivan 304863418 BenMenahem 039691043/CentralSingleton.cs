@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Text;
 using System.Reflection;
+using FacebookWrapper.ObjectModel;
 
 namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 {
@@ -12,13 +13,33 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         private static readonly object sr_instanceKey = new object();
         private static CentralSingleton s_instance;
         private readonly object r_appConfigKey = new object();
+        private readonly object r_attendeesFromEventKey = new object();
+        private readonly object r_SharedPhotosTagsKey = new object();
         private FBAppConfig m_AppConfig;
+        private LazyList<UserRank<Event>> m_AttendeesFromEventList = null;
+        private LazyList<UserRank<Photo>> m_SharedPhotosTagsList = null;
 
         public FBAppConfig AppConfig
         {
             get
             {
                 return getLazyInstance<FBAppConfig>(m_AppConfig, r_appConfigKey);
+            }
+        }
+
+        public LazyList<UserRank<Event>> AttendeesFromEventList
+        {
+            get
+            {
+                return getLazyInstance<LazyList<UserRank<Event>>>(m_AttendeesFromEventList, r_attendeesFromEventKey);
+            }
+        }
+
+        public LazyList<UserRank<Photo>> SharedPhotosTagsList
+        {
+            get
+            {
+                return getLazyInstance<LazyList<UserRank<Photo>>>(m_SharedPhotosTagsList, r_SharedPhotosTagsKey);
             }
         }
 
