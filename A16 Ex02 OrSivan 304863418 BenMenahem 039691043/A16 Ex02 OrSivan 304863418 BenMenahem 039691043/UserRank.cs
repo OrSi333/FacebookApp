@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FacebookWrapper.ObjectModel;
+using System.Drawing;
 
 namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 {
@@ -12,12 +13,18 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         private int k_Bigger = 1;
         private int k_Smaller = -1;
         private int k_Equal = 0;
-
-        public User User { get; private set; }
+        private User m_User;
 
         public string Id { get; private set; }
 
         public string Name { get; private set; }
+
+        public Image ImageSquare {
+            get
+            {
+                return m_User.ImageSquare;
+            }
+        }
 
         public string NameCount
         {
@@ -31,7 +38,8 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         public UserRank(User i_User)
         {
-            User = i_User;
+            m_User = i_User;
+            
             Id = i_User.Id;
             Name = i_User.Name;
             m_ObjectsIn = new List<T>();

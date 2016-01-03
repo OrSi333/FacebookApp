@@ -7,6 +7,7 @@ using System.ComponentModel;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
 using System.Collections;
+using System.Threading;
 
 namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 {
@@ -27,25 +28,27 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         {
             FacebookService.s_CollectionLimit = k_NumberOfEventsToFetch;
             FacebookObjectCollection<Event> userFacebookEvents = i_LoggedInUser.Events;
-            Dictionary<string, UserRank<Event>> allAttendingUsersOnUserEvents = new Dictionary<string, UserRank<Event>>();
+            DictionaryProxy<string, UserRank<Event>> allAttendingUsersOnUserEvents = new DictionaryProxy<string, UserRank<Event>>();
             FacebookService.s_CollectionLimit = k_NumberOfUsersFromEventsToFetch;
+            ArrayList threadList = new ArrayList();
             foreach (Event userFacebookEvent in userFacebookEvents)
             {
                 if (userFacebookEvent.Privacy == Event.ePrivacy.Open)
                 {
-                    foreach (User attendingUser in userFacebookEvent.AttendingUsers)
-                    {
-                        UserRank<Event> currentAttendee;
-
-                        if (!allAttendingUsersOnUserEvents.TryGetValue(attendingUser.Id, out currentAttendee))
-                        {
-                            currentAttendee = new UserRank<Event>(attendingUser);
-                            allAttendingUsersOnUserEvents.Add(attendingUser.Id, currentAttendee);
-                        }
-
-                        currentAttendee.AddObjectToUser(userFacebookEvent);
-                    }
+                    Thread getAttendeesInEventThread = new Thread(() => getAttendeesInEvent(userFacebookEvent, allAttendingUsersOnUserEvents));
+                    threadList.Add(getAttendeesInEventThread);
+                    
                 }
+            }
+            
+            foreach (Thread thread in threadList)
+            {
+                thread.Start();
+            }
+
+            foreach (Thread thread in threadList)
+            {
+                thread.Join();
             }
 
             List<string> usersToRemove = new List<string>();
@@ -73,11 +76,31 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             return allAttendingList;
         }
 
+        private static void getAttendeesInEvent(Event i_UserFacebookEvent, DictionaryProxy<string, UserRank<Event>> i_AllAttendingUsersOnUserEvents)
+        {
+            foreach (User attendingUser in i_UserFacebookEvent.AttendingUsers)
+            {
+                UserRank<Event> currentAttendee;
+
+                lock (i_AllAttendingUsersOnUserEvents)
+                {
+                     if (!i_AllAttendingUsersOnUserEvents.TryGetValue(attendingUser.Id, out currentAttendee))
+                {
+                    currentAttendee = new UserRank<Event>(attendingUser);
+                    i_AllAttendingUsersOnUserEvents.Add(attendingUser.Id, currentAttendee);
+                }
+
+                currentAttendee.AddObjectToUser(i_UserFacebookEvent);
+                }
+               
+            }
+        }
+
         internal static List<UserRank<Photo>> FetchTags(User i_LoggedInUser)
         {
             FacebookService.s_CollectionLimit = k_NumberOfPhotosToFetch;
             FacebookObjectCollection<Photo> userTaggedPhotos = i_LoggedInUser.PhotosTaggedIn;
-            Dictionary<string, UserRank<Photo>> allTaggedFriendsOnUserPhotos = new Dictionary<string, UserRank<Photo>>();
+            DictionaryProxy<string, UserRank<Photo>> allTaggedFriendsOnUserPhotos = new DictionaryProxy<string, UserRank<Photo>>();
             foreach (Photo photo in userTaggedPhotos)
             {
                 foreach (PhotoTag photoTag in photo.Tags)
