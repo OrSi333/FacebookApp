@@ -28,7 +28,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         {
             FacebookService.s_CollectionLimit = k_NumberOfEventsToFetch;
             FacebookObjectCollection<Event> userFacebookEvents = i_LoggedInUser.Events;
-            DictionaryProxy<string, UserRank<Event>> allAttendingUsersOnUserEvents = new DictionaryProxy<string, UserRank<Event>>();
+            Dictionary<string, UserRank<Event>> allAttendingUsersOnUserEvents = new Dictionary<string, UserRank<Event>>();
             FacebookService.s_CollectionLimit = k_NumberOfUsersFromEventsToFetch;
             ArrayList threadList = new ArrayList();
             foreach (Event userFacebookEvent in userFacebookEvents)
@@ -76,7 +76,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             return allAttendingList;
         }
 
-        private static void getAttendeesInEvent(Event i_UserFacebookEvent, DictionaryProxy<string, UserRank<Event>> i_AllAttendingUsersOnUserEvents)
+        private static void getAttendeesInEvent(Event i_UserFacebookEvent, Dictionary<string, UserRank<Event>> i_AllAttendingUsersOnUserEvents)
         {
             foreach (User attendingUser in i_UserFacebookEvent.AttendingUsers)
             {
@@ -100,7 +100,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         {
             FacebookService.s_CollectionLimit = k_NumberOfPhotosToFetch;
             FacebookObjectCollection<Photo> userTaggedPhotos = i_LoggedInUser.PhotosTaggedIn;
-            DictionaryProxy<string, UserRank<Photo>> allTaggedFriendsOnUserPhotos = new DictionaryProxy<string, UserRank<Photo>>();
+            Dictionary<string, UserRank<Photo>> allTaggedFriendsOnUserPhotos = new Dictionary<string, UserRank<Photo>>();
             foreach (Photo photo in userTaggedPhotos)
             {
                 foreach (PhotoTag photoTag in photo.Tags)
