@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FacebookWrapper.ObjectModel;
 using System.Xml.Serialization;
 using System.IO;
-using System.Windows.Forms;
 
 namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 {
     [Serializable]
     public class FBAppConfig
     {
-        private const string k_pathToXml = @"C:\xml.xml";
+        private const string k_pathToXml = @"C:\myFBAppConfig.xml";
         
         public string LastAccessToken { get; set; }
 
@@ -39,7 +34,6 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             }
             catch (Exception e)
             {
-                
                 appConfig = new FBAppConfig();
             }
             finally
@@ -49,8 +43,8 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
                     fileStream.Close();
                 }
             }
+
             return appConfig;
         }
-        
     }
 }

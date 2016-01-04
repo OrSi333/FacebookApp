@@ -19,6 +19,25 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         private UserRankListAdapter<Event> m_AttendeesFromEventListAdapter = null;
         private UserRankListAdapter<Photo> m_SharedPhotosTagsListAdapter = null;
 
+        public static CentralSingleton Instance
+        {
+            get
+            {
+                if (s_instance == null)
+                {
+                    lock (sr_instanceKey)
+                    {
+                        if (s_instance == null)
+                        {
+                            s_instance = new CentralSingleton();
+                        }
+                    }
+                }
+
+                return s_instance;
+            }
+        }
+
         public FBAppConfig AppConfig
         {
             get
@@ -44,7 +63,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         }
 
         private T getLazyInstance<T>(T io_InstanceRef, object i_Key)
-            where T: class
+            where T : class
         {
             if (io_InstanceRef == null)
             {
@@ -61,18 +80,19 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         }
 
         private T invokePrivateStaticInit<T>()
-            where T: class
+            where T : class
         {
             Type type = typeof(T);
             object objToInit = null;
-            foreach (MethodInfo method in type.GetMethods(BindingFlags.NonPublic|BindingFlags.Static))
+            foreach (MethodInfo method in type.GetMethods(BindingFlags.NonPublic | BindingFlags.Static))
             {
                 if (method.IsPrivate && method.IsStatic && method.Name.StartsWith("init"))
                 {
-                    objToInit = method.Invoke(null,null);
+                    objToInit = method.Invoke(null, null);
                     break;
                 }
             }
+
             if (objToInit == null)
             {
                 throw new Exception(string.Format("Class {0} doesn't contain a private static init method!", type));
@@ -83,26 +103,6 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             }
         }
 
-        public static CentralSingleton Instance
-        {
-            get
-            {
-                if (s_instance == null)
-                {
-                    lock (sr_instanceKey)
-                    {
-                        if (s_instance == null)
-                        {
-                            s_instance = new CentralSingleton();
-                        }
-                    }
-                }
-
-                return s_instance;
-            }
-        }
-
         private CentralSingleton() { }
-        
     }
 }

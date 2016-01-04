@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.ComponentModel;
-using FacebookWrapper.ObjectModel;
-using FacebookWrapper;
 using System.Collections;
 using System.Threading;
+using FacebookWrapper.ObjectModel;
+using FacebookWrapper;
 
 namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 {
@@ -37,7 +35,6 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
                 {
                     Thread getAttendeesInEventThread = new Thread(() => getAttendeesInEvent(userFacebookEvent, allAttendingUsersOnUserEvents));
                     threadList.Add(getAttendeesInEventThread);
-                    
                 }
             }
             
@@ -92,7 +89,6 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
                 currentAttendee.AddObjectToUser(i_UserFacebookEvent);
                 }
-               
             }
         }
 
@@ -127,7 +123,6 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         internal static void FetchTags(User i_LoggedInUser, ListBox i_ListBoxFriendsWithRank)
         {
-
             List<UserRank<Photo>> allUsersWithTagsOnPhotos = CentralSingleton.Instance.SharedPhotosTagsListAdapter.UserRankList;
             if (allUsersWithTagsOnPhotos == null)
             {
@@ -142,7 +137,6 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             {
                 i_ListBoxFriendsWithRank.Invoke(new Action(() => i_ListBoxFriendsWithRank.Items.Add(userRank)));
             }
-
         }
 
         internal static void FetchAttendees(User i_LoggedInUser, ListBox i_ListBoxFriendsWithRank)
@@ -161,8 +155,6 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             {
                 i_ListBoxFriendsWithRank.Invoke(new Action(() => i_ListBoxFriendsWithRank.Items.Add(userRank)));
             }
-
         }
-
     }
 }

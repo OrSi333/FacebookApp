@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using Facebook;
@@ -35,13 +30,10 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         private EventForm m_selectedEventForm = null;
         private FBAppConfig m_appConfig;
 
-        private Post CurrentPost { get; set; }
-
         public MyFBAppForm()
         {
             InitializeComponent();
             m_appConfig = CentralSingleton.Instance.AppConfig;
-
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -121,7 +113,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         private void initApp(LoginResult i_Results)
         {
             m_LoggedInUser = i_Results.LoggedInUser;
-            fetchUserInfo();
+            new Thread(() => fetchUserInfo()).Start();
             doAfterLogin();
         }
 
@@ -141,7 +133,8 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             Status postedStatus = null;
             try
             {
-                postedStatus = m_LoggedInUser.PostStatus(TextBoxStatus.Text, null);
+                string statusToPost = TextBoxStatus.Text;
+                new Thread(() => postedStatus = m_LoggedInUser.PostStatus(statusToPost, null)).Start();
             }
             catch (FacebookOAuthException i_FBException)
             {
@@ -164,7 +157,6 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
                 ListBoxUndecidedEvents.Items.Add(currentEvent);
             }
 
-            userBindingSource.DataSource = m_LoggedInUser;
             if (ueEv.Count == 0)
             {
                 MessageBox.Show("No Events to retrieve :(");
@@ -175,17 +167,13 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         {
             listBoxFriendsWithRank.Tag = k_PhotosGridTag;
             listBoxFriendsWithRank.Items.Clear();
-
             new Thread(createPhotosFriendsListBox).Start();
-            
         }
 
         private void createPhotosFriendsListBox()
         {
             FBSpecialFeatures.FetchTags(m_LoggedInUser, listBoxFriendsWithRank);
-
         }
-
 
         private void listBoxUndecidedEvents_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -220,16 +208,17 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         private void createEventFriendsListBox()
         {
             FBSpecialFeatures.FetchAttendees(m_LoggedInUser, listBoxFriendsWithRank);
-
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             try
-            {
-                if (CurrentPost != null)
+            {   
+                if (ListBoxWallPosts.SelectedItem != null)
                 {
-                    CurrentPost.Comment(TextBoxWallWriteComment.Text);
+                    Post currentPost = ListBoxWallPosts.SelectedItem as Post;
+                    string statusToWrite = TextBoxWallWriteComment.Text;
+                    new Thread(() => currentPost.Comment(statusToWrite)).Start();
                 }
                 else
                 {
@@ -240,6 +229,12 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             {
                 MessageBox.Show(i_FBOAuthException.Message);
             }
+            catch (NullReferenceException i_nullReferenceException)
+            {
+                MessageBox.Show(i_nullReferenceException.Message);
+            }
+
+            MessageBox.Show("Posted!");
         }
 
         private void listBoxFriendsWithRank_SelectedIndexChanged(object sender, EventArgs e)

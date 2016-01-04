@@ -33,22 +33,17 @@
             System.Windows.Forms.Label messageLabel;
             System.Windows.Forms.Label pictureURLLabel;
             System.Windows.Forms.Label updateTimeLabel;
+            System.Windows.Forms.Label placeLabel;
             this.ButtonLogin = new System.Windows.Forms.Button();
             this.PictureBoxProfile = new System.Windows.Forms.PictureBox();
             this.TextBoxStatus = new System.Windows.Forms.TextBox();
             this.ButtonPostStatus = new System.Windows.Forms.Button();
             this.tabControlFBFeatures = new System.Windows.Forms.TabControl();
             this.tabPagePost = new System.Windows.Forms.TabPage();
-            this.userListBox = new System.Windows.Forms.ListBox();
-            this.notYetRepliedUsersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.pictureSqaureURLPictureBox = new System.Windows.Forms.PictureBox();
-            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ListBoxUndecidedEvents = new System.Windows.Forms.ListBox();
             this.Wall = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.commentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.postBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.commentsListBox = new System.Windows.Forms.ListBox();
             this.messageLabel1 = new System.Windows.Forms.Label();
             this.pictureURLLinkLabel = new System.Windows.Forms.LinkLabel();
             this.updateTimeDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -64,23 +59,26 @@
             this.m_PanelPeopleInSameEvents = new System.Windows.Forms.Panel();
             this.m_ListBoxSharedEvents = new System.Windows.Forms.ListBox();
             this.m_PictureBoxUserFromSharedEvents = new System.Windows.Forms.PictureBox();
+            this.commentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.commentsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.commentsListBox = new System.Windows.Forms.ListBox();
+            this.placeLabel1 = new System.Windows.Forms.Label();
             messageLabel = new System.Windows.Forms.Label();
             pictureURLLabel = new System.Windows.Forms.Label();
             updateTimeLabel = new System.Windows.Forms.Label();
+            placeLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxProfile)).BeginInit();
             this.tabControlFBFeatures.SuspendLayout();
             this.tabPagePost.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.notYetRepliedUsersBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureSqaureURLPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             this.Wall.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.commentsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.m_PanelSharedImagesWithFriend.SuspendLayout();
             this.m_PanelPeopleInSameEvents.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_PictureBoxUserFromSharedEvents)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.commentsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.commentsBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // messageLabel
@@ -164,8 +162,6 @@
             // tabPagePost
             // 
             this.tabPagePost.AutoScroll = true;
-            this.tabPagePost.Controls.Add(this.userListBox);
-            this.tabPagePost.Controls.Add(this.pictureSqaureURLPictureBox);
             this.tabPagePost.Controls.Add(this.ListBoxUndecidedEvents);
             this.tabPagePost.Controls.Add(this.ButtonPostStatus);
             this.tabPagePost.Controls.Add(this.PictureBoxProfile);
@@ -177,34 +173,6 @@
             this.tabPagePost.TabIndex = 0;
             this.tabPagePost.Text = "Post";
             this.tabPagePost.UseVisualStyleBackColor = true;
-            // 
-            // userListBox
-            // 
-            this.userListBox.DataSource = this.notYetRepliedUsersBindingSource;
-            this.userListBox.DisplayMember = "Bio";
-            this.userListBox.FormattingEnabled = true;
-            this.userListBox.Location = new System.Drawing.Point(30, 154);
-            this.userListBox.Name = "userListBox";
-            this.userListBox.Size = new System.Drawing.Size(300, 212);
-            this.userListBox.TabIndex = 6;
-            this.userListBox.ValueMember = "Albums";
-            // 
-            // notYetRepliedUsersBindingSource
-            // 
-            this.notYetRepliedUsersBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.User);
-            // 
-            // pictureSqaureURLPictureBox
-            // 
-            this.pictureSqaureURLPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.userBindingSource, "PictureSqaureURL", true));
-            this.pictureSqaureURLPictureBox.Location = new System.Drawing.Point(18, 87);
-            this.pictureSqaureURLPictureBox.Name = "pictureSqaureURLPictureBox";
-            this.pictureSqaureURLPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.pictureSqaureURLPictureBox.TabIndex = 6;
-            this.pictureSqaureURLPictureBox.TabStop = false;
-            // 
-            // userBindingSource
-            // 
-            this.userBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.User);
             // 
             // ListBoxUndecidedEvents
             // 
@@ -231,6 +199,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(placeLabel);
+            this.panel1.Controls.Add(this.placeLabel1);
             this.panel1.Controls.Add(this.commentsListBox);
             this.panel1.Controls.Add(messageLabel);
             this.panel1.Controls.Add(this.messageLabel1);
@@ -240,28 +210,12 @@
             this.panel1.Controls.Add(this.updateTimeDateTimePicker);
             this.panel1.Location = new System.Drawing.Point(19, 16);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(422, 421);
+            this.panel1.Size = new System.Drawing.Size(422, 303);
             this.panel1.TabIndex = 8;
-            // 
-            // commentsBindingSource
-            // 
-            this.commentsBindingSource.DataMember = "Comments";
-            this.commentsBindingSource.DataSource = this.postBindingSource;
             // 
             // postBindingSource
             // 
             this.postBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Post);
-            // 
-            // commentsListBox
-            // 
-            this.commentsListBox.DataSource = this.commentsBindingSource;
-            this.commentsListBox.DisplayMember = "Message";
-            this.commentsListBox.FormattingEnabled = true;
-            this.commentsListBox.Location = new System.Drawing.Point(20, 169);
-            this.commentsListBox.Name = "commentsListBox";
-            this.commentsListBox.Size = new System.Drawing.Size(300, 134);
-            this.commentsListBox.TabIndex = 12;
-            this.commentsListBox.ValueMember = "Comments";
             // 
             // messageLabel1
             // 
@@ -405,6 +359,45 @@
             this.m_PictureBoxUserFromSharedEvents.TabIndex = 0;
             this.m_PictureBoxUserFromSharedEvents.TabStop = false;
             // 
+            // commentsBindingSource
+            // 
+            this.commentsBindingSource.DataMember = "Comments";
+            this.commentsBindingSource.DataSource = this.postBindingSource;
+            // 
+            // commentsBindingSource1
+            // 
+            this.commentsBindingSource1.DataMember = "Comments";
+            this.commentsBindingSource1.DataSource = this.postBindingSource;
+            // 
+            // commentsListBox
+            // 
+            this.commentsListBox.DataSource = this.commentsBindingSource1;
+            this.commentsListBox.DisplayMember = "Message";
+            this.commentsListBox.FormattingEnabled = true;
+            this.commentsListBox.Location = new System.Drawing.Point(20, 180);
+            this.commentsListBox.Name = "commentsListBox";
+            this.commentsListBox.Size = new System.Drawing.Size(300, 82);
+            this.commentsListBox.TabIndex = 12;
+            this.commentsListBox.ValueMember = "Comments";
+            // 
+            // placeLabel
+            // 
+            placeLabel.AutoSize = true;
+            placeLabel.Location = new System.Drawing.Point(17, 265);
+            placeLabel.Name = "placeLabel";
+            placeLabel.Size = new System.Drawing.Size(37, 13);
+            placeLabel.TabIndex = 12;
+            placeLabel.Text = "Place:";
+            // 
+            // placeLabel1
+            // 
+            this.placeLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.postBindingSource, "Place", true));
+            this.placeLabel1.Location = new System.Drawing.Point(60, 265);
+            this.placeLabel1.Name = "placeLabel1";
+            this.placeLabel1.Size = new System.Drawing.Size(100, 23);
+            this.placeLabel1.TabIndex = 13;
+            this.placeLabel1.Text = "label1";
+            // 
             // MyFBAppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -418,19 +411,17 @@
             this.tabControlFBFeatures.ResumeLayout(false);
             this.tabPagePost.ResumeLayout(false);
             this.tabPagePost.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.notYetRepliedUsersBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureSqaureURLPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             this.Wall.ResumeLayout(false);
             this.Wall.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.commentsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.m_PanelSharedImagesWithFriend.ResumeLayout(false);
             this.m_PanelPeopleInSameEvents.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.m_PictureBoxUserFromSharedEvents)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.commentsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.commentsBindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -459,14 +450,12 @@
         private System.Windows.Forms.FlowLayoutPanel m_FlowLayoutPanelSharedImages;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.BindingSource postBindingSource;
-        private System.Windows.Forms.PictureBox pictureSqaureURLPictureBox;
-        private System.Windows.Forms.BindingSource userBindingSource;
-        private System.Windows.Forms.ListBox userListBox;
-        private System.Windows.Forms.BindingSource notYetRepliedUsersBindingSource;
         private System.Windows.Forms.Label messageLabel1;
         private System.Windows.Forms.LinkLabel pictureURLLinkLabel;
         private System.Windows.Forms.DateTimePicker updateTimeDateTimePicker;
-        private System.Windows.Forms.ListBox commentsListBox;
         private System.Windows.Forms.BindingSource commentsBindingSource;
+        private System.Windows.Forms.ListBox commentsListBox;
+        private System.Windows.Forms.BindingSource commentsBindingSource1;
+        private System.Windows.Forms.Label placeLabel1;
  }
 }

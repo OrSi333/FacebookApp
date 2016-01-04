@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FacebookWrapper.ObjectModel;
 using System.Drawing;
+using FacebookWrapper.ObjectModel;
 
 namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 {
