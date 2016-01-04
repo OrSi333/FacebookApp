@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 {
-    internal class UserRank<T> : IComparable
+    public class UserRank<T> : IComparable
     {
         private int k_NotInIndex = -1;
         private int k_Bigger = 1;
