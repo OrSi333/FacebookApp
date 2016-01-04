@@ -152,6 +152,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             //    postDisplayedMessage = string.Format("{0}: {1}", currentPost.From.Name, postDisplayedMessage);
             //    ListBoxWallPosts.Items.Add(postDisplayedMessage);
             //}
+
             postBindingSource.DataSource = m_LoggedInUser.Posts;
         }
 
@@ -272,27 +273,27 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             m_selectedEventForm = null;
         }
 
-        private void buttonWallCommentLike_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Comment currentComment = (postBindingSource.Current as Post).Comments[commentsListBox.SelectedIndex];
-                if (currentComment.LikedByUser)
-                {
-                    currentComment.Unlike();
-                    ButtonWallCommentLike.Text = k_likeButtonLabel;
-                }
-                else
-                {
-                    currentComment.Like();
-                    ButtonWallCommentLike.Text = k_unlikeButtonLabel;
-                }
-            }
-            catch (FacebookOAuthException i_FBOAuthException)
-            {
-                MessageBox.Show(i_FBOAuthException.Message);
-            }
-        }
+        //private void buttonWallCommentLike_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        Comment currentComment = (postBindingSource.Current as Post).Comments[commentsListBox.SelectedIndex];
+        //        if (currentComment.LikedByUser)
+        //        {
+        //            currentComment.Unlike();
+        //            ButtonWallCommentLike.Text = k_likeButtonLabel;
+        //        }
+        //        else
+        //        {
+        //            currentComment.Like();
+        //            ButtonWallCommentLike.Text = k_unlikeButtonLabel;
+        //        }
+        //    }
+        //    catch (FacebookOAuthException i_FBOAuthException)
+        //    {
+        //        MessageBox.Show(i_FBOAuthException.Message);
+        //    }
+        //}
 
         //private void listBoxWallComments_SelectedIndexChanged(object sender, EventArgs e)
         //{
