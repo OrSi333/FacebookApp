@@ -128,7 +128,13 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         internal static void FetchTags(User i_LoggedInUser, ListBox i_ListBoxFriendsWithRank)
         {
 
-            List<UserRank<Photo>> allUsersWithTagsOnPhotos = FetchTags(i_LoggedInUser);
+            List<UserRank<Photo>> allUsersWithTagsOnPhotos = CentralSingleton.Instance.SharedPhotosTagsListAdapter.UserRankList;
+            if (allUsersWithTagsOnPhotos == null)
+            {
+                allUsersWithTagsOnPhotos = FetchTags(i_LoggedInUser);
+                CentralSingleton.Instance.SharedPhotosTagsListAdapter.UserRankList = allUsersWithTagsOnPhotos;
+            }
+
             ArrayList userRankList = new ArrayList(allUsersWithTagsOnPhotos);
             userRankList.Sort();
             userRankList.Reverse();
@@ -141,7 +147,13 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         internal static void FetchAttendees(User i_LoggedInUser, ListBox i_ListBoxFriendsWithRank)
         {
-            List<UserRank<Event>> allUsersWithSharedEvents = FetchAttendeesFromEvents(i_LoggedInUser);
+            List<UserRank<Event>> allUsersWithSharedEvents = CentralSingleton.Instance.AttendeesFromEventListAdapter.UserRankList;
+            if (allUsersWithSharedEvents == null)
+            {
+                allUsersWithSharedEvents = FetchAttendeesFromEvents(i_LoggedInUser);
+                CentralSingleton.Instance.AttendeesFromEventListAdapter.UserRankList = allUsersWithSharedEvents;
+            }
+
             ArrayList userRankList = new ArrayList(allUsersWithSharedEvents);
             userRankList.Sort();
             userRankList.Reverse();

@@ -16,8 +16,8 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         private readonly object r_attendeesFromEventKey = new object();
         private readonly object r_SharedPhotosTagsKey = new object();
         private FBAppConfig m_AppConfig;
-        private UserRankListAdapter<UserRank<Event>> m_AttendeesFromEventListAdapter = null;
-        private UserRankListAdapter<UserRank<Photo>> m_SharedPhotosTagsListAdapter = null;
+        private UserRankListAdapter<Event> m_AttendeesFromEventListAdapter = null;
+        private UserRankListAdapter<Photo> m_SharedPhotosTagsListAdapter = null;
 
         public FBAppConfig AppConfig
         {
@@ -27,19 +27,19 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             }
         }
 
-        public UserRankListAdapter<UserRank<Event>> AttendeesFromEventListAdapter
+        public UserRankListAdapter<Event> AttendeesFromEventListAdapter
         {
             get
             {
-                return getLazyInstance<UserRankListAdapter<UserRank<Event>>>(m_AttendeesFromEventListAdapter, r_attendeesFromEventKey);
+                return getLazyInstance<UserRankListAdapter<Event>>(m_AttendeesFromEventListAdapter, r_attendeesFromEventKey);
             }
         }
 
-        public UserRankListAdapter<UserRank<Photo>> SharedPhotosTagsListAdapter
+        public UserRankListAdapter<Photo> SharedPhotosTagsListAdapter
         {
             get
             {
-                return getLazyInstance<UserRankListAdapter<UserRank<Photo>>>(m_SharedPhotosTagsListAdapter, r_SharedPhotosTagsKey);
+                return getLazyInstance<UserRankListAdapter<Photo>>(m_SharedPhotosTagsListAdapter, r_SharedPhotosTagsKey);
             }
         }
 
