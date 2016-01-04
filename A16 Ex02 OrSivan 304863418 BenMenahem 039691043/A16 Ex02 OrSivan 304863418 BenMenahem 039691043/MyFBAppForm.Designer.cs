@@ -33,7 +33,6 @@
             System.Windows.Forms.Label messageLabel;
             System.Windows.Forms.Label pictureURLLabel;
             System.Windows.Forms.Label updateTimeLabel;
-            System.Windows.Forms.Label likedByUserLabel;
             this.ButtonLogin = new System.Windows.Forms.Button();
             this.PictureBoxProfile = new System.Windows.Forms.PictureBox();
             this.TextBoxStatus = new System.Windows.Forms.TextBox();
@@ -47,9 +46,9 @@
             this.ListBoxUndecidedEvents = new System.Windows.Forms.ListBox();
             this.Wall = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.commentsListBox = new System.Windows.Forms.ListBox();
             this.commentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.postBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.commentsListBox = new System.Windows.Forms.ListBox();
             this.messageLabel1 = new System.Windows.Forms.Label();
             this.pictureURLLinkLabel = new System.Windows.Forms.LinkLabel();
             this.updateTimeDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -65,11 +64,9 @@
             this.m_PanelPeopleInSameEvents = new System.Windows.Forms.Panel();
             this.m_ListBoxSharedEvents = new System.Windows.Forms.ListBox();
             this.m_PictureBoxUserFromSharedEvents = new System.Windows.Forms.PictureBox();
-            this.likedByUserCheckBox = new System.Windows.Forms.CheckBox();
             messageLabel = new System.Windows.Forms.Label();
             pictureURLLabel = new System.Windows.Forms.Label();
             updateTimeLabel = new System.Windows.Forms.Label();
-            likedByUserLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxProfile)).BeginInit();
             this.tabControlFBFeatures.SuspendLayout();
             this.tabPagePost.SuspendLayout();
@@ -98,7 +95,7 @@
             // pictureURLLabel
             // 
             pictureURLLabel.AutoSize = true;
-            pictureURLLabel.Location = new System.Drawing.Point(17, 50);
+            pictureURLLabel.Location = new System.Drawing.Point(17, 112);
             pictureURLLabel.Name = "pictureURLLabel";
             pictureURLLabel.Size = new System.Drawing.Size(68, 13);
             pictureURLLabel.TabIndex = 9;
@@ -107,7 +104,7 @@
             // updateTimeLabel
             // 
             updateTimeLabel.AutoSize = true;
-            updateTimeLabel.Location = new System.Drawing.Point(17, 80);
+            updateTimeLabel.Location = new System.Drawing.Point(17, 142);
             updateTimeLabel.Name = "updateTimeLabel";
             updateTimeLabel.Size = new System.Drawing.Size(71, 13);
             updateTimeLabel.TabIndex = 11;
@@ -234,8 +231,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(likedByUserLabel);
-            this.panel1.Controls.Add(this.likedByUserCheckBox);
             this.panel1.Controls.Add(this.commentsListBox);
             this.panel1.Controls.Add(messageLabel);
             this.panel1.Controls.Add(this.messageLabel1);
@@ -245,19 +240,8 @@
             this.panel1.Controls.Add(this.updateTimeDateTimePicker);
             this.panel1.Location = new System.Drawing.Point(19, 16);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(557, 421);
+            this.panel1.Size = new System.Drawing.Size(422, 421);
             this.panel1.TabIndex = 8;
-            // 
-            // commentsListBox
-            // 
-            this.commentsListBox.DataSource = this.commentsBindingSource;
-            this.commentsListBox.DisplayMember = "Message";
-            this.commentsListBox.FormattingEnabled = true;
-            this.commentsListBox.Location = new System.Drawing.Point(20, 117);
-            this.commentsListBox.Name = "commentsListBox";
-            this.commentsListBox.Size = new System.Drawing.Size(300, 186);
-            this.commentsListBox.TabIndex = 12;
-            this.commentsListBox.ValueMember = "Comments";
             // 
             // commentsBindingSource
             // 
@@ -268,23 +252,32 @@
             // 
             this.postBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Post);
             // 
+            // commentsListBox
+            // 
+            this.commentsListBox.DataSource = this.commentsBindingSource;
+            this.commentsListBox.DisplayMember = "Message";
+            this.commentsListBox.FormattingEnabled = true;
+            this.commentsListBox.Location = new System.Drawing.Point(20, 169);
+            this.commentsListBox.Name = "commentsListBox";
+            this.commentsListBox.Size = new System.Drawing.Size(300, 134);
+            this.commentsListBox.TabIndex = 12;
+            this.commentsListBox.ValueMember = "Comments";
+            // 
             // messageLabel1
             // 
-            this.messageLabel1.AutoSize = true;
             this.messageLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.postBindingSource, "Message", true));
             this.messageLabel1.Location = new System.Drawing.Point(94, 27);
             this.messageLabel1.Name = "messageLabel1";
-            this.messageLabel1.Size = new System.Drawing.Size(35, 13);
+            this.messageLabel1.Size = new System.Drawing.Size(306, 71);
             this.messageLabel1.TabIndex = 8;
             this.messageLabel1.Text = "label1";
             // 
             // pictureURLLinkLabel
             // 
-            this.pictureURLLinkLabel.AutoSize = true;
             this.pictureURLLinkLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.postBindingSource, "PictureURL", true));
-            this.pictureURLLinkLabel.Location = new System.Drawing.Point(94, 50);
+            this.pictureURLLinkLabel.Location = new System.Drawing.Point(94, 112);
             this.pictureURLLinkLabel.Name = "pictureURLLinkLabel";
-            this.pictureURLLinkLabel.Size = new System.Drawing.Size(55, 13);
+            this.pictureURLLinkLabel.Size = new System.Drawing.Size(306, 13);
             this.pictureURLLinkLabel.TabIndex = 10;
             this.pictureURLLinkLabel.TabStop = true;
             this.pictureURLLinkLabel.Text = "linkLabel2";
@@ -292,7 +285,7 @@
             // updateTimeDateTimePicker
             // 
             this.updateTimeDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.postBindingSource, "UpdateTime", true));
-            this.updateTimeDateTimePicker.Location = new System.Drawing.Point(94, 76);
+            this.updateTimeDateTimePicker.Location = new System.Drawing.Point(94, 138);
             this.updateTimeDateTimePicker.Name = "updateTimeDateTimePicker";
             this.updateTimeDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.updateTimeDateTimePicker.TabIndex = 12;
@@ -412,24 +405,6 @@
             this.m_PictureBoxUserFromSharedEvents.TabIndex = 0;
             this.m_PictureBoxUserFromSharedEvents.TabStop = false;
             // 
-            // likedByUserLabel
-            // 
-            likedByUserLabel.AutoSize = true;
-            likedByUserLabel.Location = new System.Drawing.Point(330, 277);
-            likedByUserLabel.Name = "likedByUserLabel";
-            likedByUserLabel.Size = new System.Drawing.Size(30, 13);
-            likedByUserLabel.TabIndex = 12;
-            likedByUserLabel.Text = "Like:";
-            // 
-            // likedByUserCheckBox
-            // 
-            this.likedByUserCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.commentsBindingSource, "LikedByUser", true));
-            this.likedByUserCheckBox.Location = new System.Drawing.Point(362, 272);
-            this.likedByUserCheckBox.Name = "likedByUserCheckBox";
-            this.likedByUserCheckBox.Size = new System.Drawing.Size(20, 24);
-            this.likedByUserCheckBox.TabIndex = 13;
-            this.likedByUserCheckBox.UseVisualStyleBackColor = true;
-            // 
             // MyFBAppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -493,6 +468,5 @@
         private System.Windows.Forms.DateTimePicker updateTimeDateTimePicker;
         private System.Windows.Forms.ListBox commentsListBox;
         private System.Windows.Forms.BindingSource commentsBindingSource;
-        private System.Windows.Forms.CheckBox likedByUserCheckBox;
  }
 }

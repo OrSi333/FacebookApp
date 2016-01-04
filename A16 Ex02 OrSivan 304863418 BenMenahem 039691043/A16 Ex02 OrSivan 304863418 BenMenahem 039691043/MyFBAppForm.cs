@@ -133,71 +133,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         private void fetchWallPosts()
         {
-            //foreach (Post currentPost in m_LoggedInUser.WallPosts)
-            //{
-            //    string postDisplayedMessage = string.Empty;
-            //    if (currentPost.Message != null)
-            //    {
-            //        postDisplayedMessage = currentPost.Message;
-            //    }
-            //    else if (currentPost.Caption != null)
-            //    {
-            //        postDisplayedMessage = currentPost.Caption;
-            //    }
-            //    else
-            //    {
-            //        postDisplayedMessage = string.Format("[{0}]", currentPost.Type);
-            //    }
-
-            //    postDisplayedMessage = string.Format("{0}: {1}", currentPost.From.Name, postDisplayedMessage);
-            //    ListBoxWallPosts.Items.Add(postDisplayedMessage);
-            //}
-
             postBindingSource.DataSource = m_LoggedInUser.Posts;
-        }
-
-        //private void loadWallPost(Post i_CurrentPost)
-        //{
-        //    bool isPostSupported = false;
-        //    if (i_CurrentPost.Message != null)
-        //    {
-        //        LabelWallPost.Text = i_CurrentPost.Message;
-        //        isPostSupported = true;
-        //    }
-
-        //    if (i_CurrentPost.PictureURL != null)
-        //    {
-        //        PictureBoxWallPost.LoadAsync(i_CurrentPost.PictureURL);
-        //        isPostSupported = true;
-        //    }
-
-        //    if (i_CurrentPost.Comments != null)
-        //    {
-        //        foreach(Comment currentComment in i_CurrentPost.Comments) 
-        //        {
-        //            if (currentComment.Message != null)
-        //            {
-        //                ListBoxWallComments.Items.Add(string.Format("{0}: {1}", currentComment.From.Name, currentComment.Message));
-        //            }
-        //            else
-        //            {
-        //                ListBoxWallComments.Items.Add(string.Format("{0}: <Unsupported type>", currentComment.From.Name));
-        //            }
-        //        }
-        //    }
-
-        //    if (!isPostSupported)
-        //    {
-        //        LabelWallPost.Text = string.Format("<Post of type {0} are currently not supported>", i_CurrentPost.Type);
-        //    }
-        //}
-
-        private void clearWallPost()
-        {
-            //LabelWallPost.Text = string.Empty;
-            //PictureBoxWallPost.Image = null;
-            //ListBoxWallComments.Items.Clear();
-            //ButtonWallCommentLike.Visible = false;
         }
 
         private void buttonPostStatus_Click(object sender, EventArgs e)
@@ -273,57 +209,6 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             m_selectedEventForm = null;
         }
 
-        //private void buttonWallCommentLike_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        Comment currentComment = (postBindingSource.Current as Post).Comments[commentsListBox.SelectedIndex];
-        //        if (currentComment.LikedByUser)
-        //        {
-        //            currentComment.Unlike();
-        //            ButtonWallCommentLike.Text = k_likeButtonLabel;
-        //        }
-        //        else
-        //        {
-        //            currentComment.Like();
-        //            ButtonWallCommentLike.Text = k_unlikeButtonLabel;
-        //        }
-        //    }
-        //    catch (FacebookOAuthException i_FBOAuthException)
-        //    {
-        //        MessageBox.Show(i_FBOAuthException.Message);
-        //    }
-        //}
-
-        //private void listBoxWallComments_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    if (ListBoxWallComments.SelectedItems.Count == 1)
-        //    {
-        //        try
-        //        {
-        //            Comment currentComment = m_LoggedInUser.WallPosts[ListBoxWallPosts.SelectedIndex].Comments[ListBoxWallComments.SelectedIndex];
-        //            if (currentComment.LikedByUser)
-        //            {
-        //                ButtonWallCommentLike.Text = k_unlikeButtonLabel;
-        //            }
-        //            else
-        //            {
-        //                ButtonWallCommentLike.Text = k_likeButtonLabel;
-        //            }
-
-        //            ButtonWallCommentLike.Visible = true;
-        //        }
-        //        catch (FacebookOAuthException i_FBOAuthException)
-        //        {
-        //            MessageBox.Show(i_FBOAuthException.Message);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        ButtonWallCommentLike.Visible = false;
-        //    }
-        //}
-
         private void m_FetchEventFriends_Click(object sender, EventArgs e)
         {
             listBoxFriendsWithRank.Tag = k_EventsGridTag;
@@ -356,30 +241,6 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
                 MessageBox.Show(i_FBOAuthException.Message);
             }
         }
-
-        //private void listBoxWallPosts_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    clearWallPost();
-        //    try
-        //    {
-        //        if (ListBoxWallPosts.SelectedItems.Count == 1)
-        //        {
-        //            Post currentPost = m_LoggedInUser.WallPosts[ListBoxWallPosts.SelectedIndex];
-        //            if (currentPost != null)
-        //            {
-        //                loadWallPost(currentPost);
-        //            }
-        //            else
-        //            {
-        //                MessageBox.Show("Couldn't load post");
-        //            }
-        //        }
-        //    }
-        //    catch (FacebookOAuthException i_FBOAuthException)
-        //    {
-        //        MessageBox.Show(i_FBOAuthException.Message);
-        //    }
-        //}
 
         private void listBoxFriendsWithRank_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -431,6 +292,5 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             m_appConfig.SaveToXml();
             base.OnClosing(e);
         }
-
     }
 }
