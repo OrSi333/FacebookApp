@@ -25,7 +25,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         {
         }
 
-        internal void loadEvent(Event i_Event, Point i_LoadingLocation)
+        public void loadEvent(Event i_Event, Point i_LoadingLocation)
         {
             m_Event = i_Event;
             pictureBoxEventPhoto.LoadAsync(i_Event.PictureNormalURL);

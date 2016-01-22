@@ -14,6 +14,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         private const string k_likeButtonLabel = "Like";
         private const string k_unlikeButtonLabel = "Unlike";
         private const string m_StatusDefaultMessage = "What's on your mind?";
+        
 
         private const string k_NameColumnHeader = "Name";
         private const string k_SharedEventsColumnHeader = "Number Of Shared Events";
@@ -27,7 +28,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         private const int k_MinimunNumberOfSharedEventsToShow = 3;
 
         private User m_LoggedInUser;
-        private EventForm m_selectedEventForm = null;
+        private IEventFormFacade m_selectedEventForm = null;
         private FBAppConfig m_appConfig;
 
         public MyFBAppForm()
@@ -151,6 +152,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             tabControlFBFeatures.Enabled = true;
             
             FacebookObjectCollection<Event> ueEv = m_LoggedInUser.EventsNotYetReplied;
+            
             ListBoxUndecidedEvents.DisplayMember = "Name";
             foreach(Event currentEvent in ueEv)
             {
@@ -184,17 +186,13 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
                 {
                     m_selectedEventForm.Close();
                 }
+                else
+                {
+                    m_selectedEventForm = EventFormFacade.CreateForm();
+                }
 
-                m_selectedEventForm = new EventForm();
-                m_selectedEventForm.loadEvent(selectedEvent, ListBoxUndecidedEvents.PointToScreen(ListBoxUndecidedEvents.Location));
-                m_selectedEventForm.Show();
-                m_selectedEventForm.FormClosed += resetEventWindow;
+                m_selectedEventForm.LoadAndShowEvent(selectedEvent, ListBoxUndecidedEvents.PointToScreen(ListBoxUndecidedEvents.Location));
             }
-        }
-
-        private void resetEventWindow(object sender, FormClosedEventArgs e)
-        {
-            m_selectedEventForm = null;
         }
 
         private void m_FetchEventFriends_Click(object sender, EventArgs e)
@@ -286,6 +284,18 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         {
             m_appConfig.SaveToXml();
             base.OnClosing(e);
+        }
+
+        private void ApplyFiltersButton_Click_1(object sender, EventArgs e)
+        {
+            m_selectedEventForm.Close();
+            m_selectedEventForm = m_selectedEventForm.Decorate(() => MessageBox.Show("HI"), DecoratorUtils.NoAction);
+        }
+
+        private void RemoveFiltersButton_Click_1(object sender, EventArgs e)
+        {
+            m_selectedEventForm.Close();
+            m_selectedEventForm = null;
         }
     }
 }
