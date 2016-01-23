@@ -14,7 +14,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         public List<string> EventHostBlacklist { get; set; }
 
-        private FBAppConfig() { }
+        private FBAppConfig() { EventHostBlacklist = new List<string>(); }
 
         public void SaveToXml()
         {
