@@ -11,11 +11,11 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
     class EventFormPreLoadDecorator<T> : IEventFormFacade
     {
         protected IEventFormFacade m_EventFormFacade;
-        protected Predicate<T> m_checkToContinue; 
+        protected Func<Event,T,bool> m_checkToContinue; 
         protected T m_predicatParameter;
-        protected Action m_doIfFail;
+        protected Action<Event> m_doIfFail;
 
-        public EventFormPreLoadDecorator(IEventFormFacade i_EventFormFacade, Predicate<T> i_CheckToContinue ,T i_PredicatParameter, Action i_DoIfFail)
+        public EventFormPreLoadDecorator(IEventFormFacade i_EventFormFacade, Func<Event,T,bool> i_CheckToContinue ,T i_PredicatParameter, Action<Event> i_DoIfFail)
         {
             m_EventFormFacade = i_EventFormFacade;
             m_checkToContinue = i_CheckToContinue;
@@ -25,13 +25,13 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         
         public void LoadAndShowEvent(Event i_Event, Point i_LoadingLocation)
         {
-            if (m_checkToContinue.Invoke(m_predicatParameter))
+            if (m_checkToContinue.Invoke(i_Event,m_predicatParameter))
             {
                 m_EventFormFacade.LoadAndShowEvent(i_Event, i_LoadingLocation);   
             }
             else
             {
-                m_doIfFail.InvokeIfNotNull();
+                m_doIfFail.InvokeIfNotNull(i_Event);
             }
         }
 

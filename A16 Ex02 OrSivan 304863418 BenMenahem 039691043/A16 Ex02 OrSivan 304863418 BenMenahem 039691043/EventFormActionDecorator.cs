@@ -11,10 +11,10 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
     class EventFormActionDecorator : IEventFormFacade
     {
         private IEventFormFacade m_EventFormFacade;
-        private Action m_doPreLoad;
-        private Action m_doAfterLoad;
+        private Action<Event> m_doPreLoad;
+        private Action<Event> m_doAfterLoad;
 
-        public EventFormActionDecorator(IEventFormFacade i_EventFormFacade, Action i_DoPreLoad, Action i_DoAfterLoad)
+        public EventFormActionDecorator(IEventFormFacade i_EventFormFacade, Action<Event> i_DoPreLoad, Action<Event> i_DoAfterLoad)
         {
             m_EventFormFacade = i_EventFormFacade;
             m_doPreLoad = i_DoPreLoad;
@@ -23,9 +23,9 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         
         public void LoadAndShowEvent(Event i_Event, Point i_LoadingLocation)
         {
-            m_doPreLoad.InvokeIfNotNull();
+            m_doPreLoad.InvokeIfNotNull(i_Event);
             m_EventFormFacade.LoadAndShowEvent(i_Event,i_LoadingLocation);
-            m_doAfterLoad.InvokeIfNotNull();
+            m_doAfterLoad.InvokeIfNotNull(i_Event);
         }
 
         public void Close()

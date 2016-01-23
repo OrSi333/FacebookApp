@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Threading;
@@ -28,7 +29,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         private const int k_MinimunNumberOfSharedEventsToShow = 3;
 
         private User m_LoggedInUser;
-        private IEventFormFacade m_selectedEventForm = null;
+        private IEventFormFacade m_selectedEventForm = EventFormFacade.CreateForm();
         private FBAppConfig m_appConfig;
 
         public MyFBAppForm()
@@ -163,6 +164,17 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             {
                 MessageBox.Show("No Events to retrieve :(");
             }
+
+            this.ApplyFiltersButton.Click += (i_Sender, i_EventArgs) =>
+            {
+                RemoveFiltersButton.Enabled = true;
+                ApplyFiltersButton.Enabled = false;
+            };
+            this.RemoveFiltersButton.Click += (i_Sender, i_EventArgs) =>
+            {
+                RemoveFiltersButton.Enabled = false;
+                ApplyFiltersButton.Enabled = true;
+            };
         }
 
         private void m_ShowTags_Click(object sender, EventArgs e)
@@ -288,8 +300,28 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         private void ApplyFiltersButton_Click_1(object sender, EventArgs e)
         {
-            m_selectedEventForm.Close();
-            m_selectedEventForm = m_selectedEventForm.Decorate(() => MessageBox.Show("HI"), DecoratorUtils.NoAction);
+            if (m_selectedEventForm != null)
+            {
+                m_selectedEventForm.Close();
+            }
+            m_selectedEventForm = m_selectedEventForm
+                .Decorate((i_Event) => 
+                    MessageBox.Show(string.Format("Hosted by: {0}", i_Event.Owner.Name)),
+                    (i_Event) =>
+                    {
+                        DialogResult dialogResult = MessageBox.Show(string.Format("Do you want to add {0} to blacklist?",i_Event.Owner.Name), string.Empty, MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            addNameToBlacklist(i_Event.Owner.Name);
+                        }
+
+                    })
+                .Decorate((i_Event, i_EventOwnerBlackList) => !i_EventOwnerBlackList.Contains(i_Event.Owner.Name),
+                    m_appConfig.EventHostBlacklist,
+                    (i_Event) =>
+                        MessageBox.Show(string.Format("You are not allowed to see events hosted by {0}",
+                            i_Event.Owner.Name)));
+
         }
 
         private void RemoveFiltersButton_Click_1(object sender, EventArgs e)
@@ -297,5 +329,32 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             m_selectedEventForm.Close();
             m_selectedEventForm = null;
         }
+
+        private void buttonAddToBlacklist_Click(object sender, EventArgs e)
+        {
+            addNameToBlacklist(textBoxNameForBlacklist.Text);
+        }
+
+        private void addNameToBlacklist(string nameFromTextbox)
+        {
+            if (!string.IsNullOrEmpty(nameFromTextbox))
+            {
+                if (!m_appConfig.EventHostBlacklist.Contains(nameFromTextbox))
+                {
+                    m_appConfig.EventHostBlacklist.Add(nameFromTextbox);
+                    MessageBox.Show(string.Format("{0} was added to the blacklist", nameFromTextbox));
+                }
+                else
+                {
+                    MessageBox.Show(string.Format("{0} is alredy in the blacklist!", nameFromTextbox));
+                }
+                textBoxNameForBlacklist.Text = string.Empty;
+            }
+            else
+            {
+                MessageBox.Show("Can't add a blank name to blacklist!");
+            }
+        }
+
     }
 }

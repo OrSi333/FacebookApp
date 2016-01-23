@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.IO;
 
@@ -10,6 +11,8 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         private const string k_pathToXml = @"C:\myFBAppConfig.xml";
         
         public string LastAccessToken { get; set; }
+
+        public List<string> EventHostBlacklist { get; set; }
 
         private FBAppConfig() { }
 

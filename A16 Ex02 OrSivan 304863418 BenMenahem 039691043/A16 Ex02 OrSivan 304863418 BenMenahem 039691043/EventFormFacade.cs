@@ -21,7 +21,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         public void LoadAndShowEvent(Event i_Event, Point i_LoadingLocation)
         {
             m_eventForm = new EventForm();
-            m_eventForm.loadEvent(i_Event,i_LoadingLocation);
+            m_eventForm.LoadEvent(i_Event,i_LoadingLocation);
             m_eventForm.Show();
         }
 
