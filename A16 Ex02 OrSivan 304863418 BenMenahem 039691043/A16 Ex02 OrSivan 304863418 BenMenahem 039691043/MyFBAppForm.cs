@@ -36,6 +36,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         {
             InitializeComponent();
             m_appConfig = CentralSingleton.Instance.AppConfig;
+            
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -204,6 +205,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
                 }
 
                 m_selectedEventForm.LoadAndShowEvent(selectedEvent, ListBoxUndecidedEvents.PointToScreen(ListBoxUndecidedEvents.Location));
+                textBoxNameForBlacklist.Text = selectedEvent.Owner.Name;
             }
         }
 
@@ -304,6 +306,30 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             {
                 m_selectedEventForm.Close();
             }
+
+            FacebookObjectCollection<Event> unRepliedEvents = m_LoggedInUser.EventsNotYetReplied;
+            FacebookObjectCollection<Event> filteredUnRepliedEvents = new FacebookObjectCollection<Event>();
+            foreach (Event currentEvent in unRepliedEvents)
+            {
+                filteredUnRepliedEvents.Add(currentEvent);
+            }
+
+            foreach (Event currentEvent in unRepliedEvents)
+            {
+                foreach (string name in m_appConfig.EventHostBlacklist)
+                {
+                    if (currentEvent.Owner.Name == name)
+                    {
+                        filteredUnRepliedEvents.Remove(currentEvent);
+                    }
+                }
+            }
+            ListBoxUndecidedEvents.Items.Clear();
+            foreach (Event currentEvent in filteredUnRepliedEvents)
+            {
+                ListBoxUndecidedEvents.Items.Add(currentEvent);
+            }
+
             m_selectedEventForm = m_selectedEventForm
                 .Decorate((i_Event) => 
                     MessageBox.Show(string.Format("Hosted by: {0}", i_Event.Owner.Name)),
@@ -328,6 +354,13 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
         {
             m_selectedEventForm.Close();
             m_selectedEventForm = null;
+            FacebookObjectCollection<Event> unRepliedEvents = m_LoggedInUser.EventsNotYetReplied;
+            ListBoxUndecidedEvents.Items.Clear();
+            foreach (Event currentEvent in unRepliedEvents)
+            {
+                ListBoxUndecidedEvents.Items.Add(currentEvent);
+            }
+
         }
 
         private void buttonAddToBlacklist_Click(object sender, EventArgs e)
@@ -342,6 +375,7 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
                 if (!m_appConfig.EventHostBlacklist.Contains(nameFromTextbox))
                 {
                     m_appConfig.EventHostBlacklist.Add(nameFromTextbox);
+                    EventHostBlacklistBox.Items.Add(nameFromTextbox);
                     MessageBox.Show(string.Format("{0} was added to the blacklist", nameFromTextbox));
                 }
                 else
@@ -354,6 +388,24 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             {
                 MessageBox.Show("Can't add a blank name to blacklist!");
             }
+        }
+
+        private void EventHostBlacklistBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (EventHostBlacklistBox.Items.Count != 0)
+            {
+                textBoxNameForBlacklist.Text = (string)EventHostBlacklistBox.SelectedItem;
+            }
+            else
+            {
+                textBoxNameForBlacklist.Text = string.Empty;
+            }
+        }
+
+        private void buttonRemoveFromBlacklist_Click(object sender, EventArgs e)
+        {
+
+            EventHostBlacklistBox.Items.Remove(EventHostBlacklistBox.SelectedItem);
         }
 
     }

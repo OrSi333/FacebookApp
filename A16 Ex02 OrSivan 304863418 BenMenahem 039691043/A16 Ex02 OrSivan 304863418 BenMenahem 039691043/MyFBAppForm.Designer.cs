@@ -40,6 +40,7 @@
             this.ButtonPostStatus = new System.Windows.Forms.Button();
             this.tabControlFBFeatures = new System.Windows.Forms.TabControl();
             this.tabPagePost = new System.Windows.Forms.TabPage();
+            this.EventHostBlacklistBox = new System.Windows.Forms.ListBox();
             this.textBoxNameForBlacklist = new System.Windows.Forms.TextBox();
             this.buttonRemoveFromBlacklist = new System.Windows.Forms.Button();
             this.buttonAddToBlacklist = new System.Windows.Forms.Button();
@@ -67,7 +68,6 @@
             this.m_PanelPeopleInSameEvents = new System.Windows.Forms.Panel();
             this.m_ListBoxSharedEvents = new System.Windows.Forms.ListBox();
             this.m_PictureBoxUserFromSharedEvents = new System.Windows.Forms.PictureBox();
-            this.eventHostBlacklistBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fBAppConfigBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.commentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             messageLabel = new System.Windows.Forms.Label();
@@ -85,7 +85,6 @@
             this.m_PanelSharedImagesWithFriend.SuspendLayout();
             this.m_PanelPeopleInSameEvents.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_PictureBoxUserFromSharedEvents)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eventHostBlacklistBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fBAppConfigBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commentsBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -180,6 +179,7 @@
             // tabPagePost
             // 
             this.tabPagePost.AutoScroll = true;
+            this.tabPagePost.Controls.Add(this.EventHostBlacklistBox);
             this.tabPagePost.Controls.Add(this.textBoxNameForBlacklist);
             this.tabPagePost.Controls.Add(this.buttonRemoveFromBlacklist);
             this.tabPagePost.Controls.Add(this.buttonAddToBlacklist);
@@ -197,9 +197,18 @@
             this.tabPagePost.Text = "Post";
             this.tabPagePost.UseVisualStyleBackColor = true;
             // 
+            // EventHostBlacklistBox
+            // 
+            this.EventHostBlacklistBox.FormattingEnabled = true;
+            this.EventHostBlacklistBox.Location = new System.Drawing.Point(189, 135);
+            this.EventHostBlacklistBox.Name = "EventHostBlacklistBox";
+            this.EventHostBlacklistBox.Size = new System.Drawing.Size(117, 95);
+            this.EventHostBlacklistBox.TabIndex = 13;
+            this.EventHostBlacklistBox.SelectedIndexChanged += new System.EventHandler(this.EventHostBlacklistBox_SelectedIndexChanged);
+            // 
             // textBoxNameForBlacklist
             // 
-            this.textBoxNameForBlacklist.Location = new System.Drawing.Point(189, 138);
+            this.textBoxNameForBlacklist.Location = new System.Drawing.Point(189, 109);
             this.textBoxNameForBlacklist.Name = "textBoxNameForBlacklist";
             this.textBoxNameForBlacklist.Size = new System.Drawing.Size(117, 20);
             this.textBoxNameForBlacklist.TabIndex = 12;
@@ -212,6 +221,7 @@
             this.buttonRemoveFromBlacklist.TabIndex = 10;
             this.buttonRemoveFromBlacklist.Text = "Remove Name from Blacklist";
             this.buttonRemoveFromBlacklist.UseVisualStyleBackColor = true;
+            this.buttonRemoveFromBlacklist.Click += new System.EventHandler(this.buttonRemoveFromBlacklist_Click);
             // 
             // buttonAddToBlacklist
             // 
@@ -225,12 +235,11 @@
             // 
             // RemoveFiltersButton
             // 
-            this.RemoveFiltersButton.Enabled = false;
             this.RemoveFiltersButton.Location = new System.Drawing.Point(370, 149);
             this.RemoveFiltersButton.Name = "RemoveFiltersButton";
             this.RemoveFiltersButton.Size = new System.Drawing.Size(75, 34);
             this.RemoveFiltersButton.TabIndex = 7;
-            this.RemoveFiltersButton.Text = "Remove Smart Filters";
+            this.RemoveFiltersButton.Text = "Remove Filter";
             this.RemoveFiltersButton.UseVisualStyleBackColor = true;
             this.RemoveFiltersButton.Click += new System.EventHandler(this.RemoveFiltersButton_Click_1);
             // 
@@ -240,7 +249,7 @@
             this.ApplyFiltersButton.Name = "ApplyFiltersButton";
             this.ApplyFiltersButton.Size = new System.Drawing.Size(75, 34);
             this.ApplyFiltersButton.TabIndex = 6;
-            this.ApplyFiltersButton.Text = "Apply Smart Filters";
+            this.ApplyFiltersButton.Text = "Filter Events";
             this.ApplyFiltersButton.UseVisualStyleBackColor = true;
             this.ApplyFiltersButton.Click += new System.EventHandler(this.ApplyFiltersButton_Click_1);
             // 
@@ -454,11 +463,6 @@
             this.m_PictureBoxUserFromSharedEvents.TabIndex = 0;
             this.m_PictureBoxUserFromSharedEvents.TabStop = false;
             // 
-            // eventHostBlacklistBindingSource
-            // 
-            this.eventHostBlacklistBindingSource.DataMember = "EventHostBlacklist";
-            this.eventHostBlacklistBindingSource.DataSource = this.fBAppConfigBindingSource;
-            // 
             // fBAppConfigBindingSource
             // 
             this.fBAppConfigBindingSource.DataSource = typeof(A16_Ex01_OrSivan_304863418_BenMenahem_039691043.FBAppConfig);
@@ -491,7 +495,6 @@
             this.m_PanelSharedImagesWithFriend.ResumeLayout(false);
             this.m_PanelPeopleInSameEvents.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.m_PictureBoxUserFromSharedEvents)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eventHostBlacklistBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fBAppConfigBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.commentsBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -535,6 +538,6 @@
         private System.Windows.Forms.Button buttonAddToBlacklist;
         private System.Windows.Forms.TextBox textBoxNameForBlacklist;
         private System.Windows.Forms.BindingSource fBAppConfigBindingSource;
-        private System.Windows.Forms.BindingSource eventHostBlacklistBindingSource;
+        private System.Windows.Forms.ListBox EventHostBlacklistBox;
  }
 }
