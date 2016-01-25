@@ -324,6 +324,19 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
 
         }
 
+        private void addNameToBlacklist(string i_Name)
+        {
+            m_appConfig.EventHostBlacklist.TryDoAction(
+                i_Name,
+                (i_List, i_Value) =>
+                {
+                    i_List.Add(i_Value);
+                    MessageBox.Show(string.Format("{0} was added to the blacklist", i_Value));
+                },
+                (i_List, i_Value) => MessageBox.Show(string.Format("{0} is alredy in the blacklist!", i_Value)),
+                (i_List, i_Value) => MessageBox.Show("Can't add a blank name to blacklist!"));
+        }
+
         private void RemoveFiltersButton_Click_1(object sender, EventArgs e)
         {
             m_selectedEventForm.Close();
@@ -335,25 +348,22 @@ namespace A16_Ex01_OrSivan_304863418_BenMenahem_039691043
             addNameToBlacklist(textBoxNameForBlacklist.Text);
         }
 
-        private void addNameToBlacklist(string nameFromTextbox)
+        private void buttonClearBlacklist_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(nameFromTextbox))
-            {
-                if (!m_appConfig.EventHostBlacklist.Contains(nameFromTextbox))
+            m_appConfig.EventHostBlacklist.Clear();
+        }
+
+        private void buttonRemoveFromBlacklist_Click(object sender, EventArgs e)
+        {
+            m_appConfig.EventHostBlacklist.TryDoAction(
+                textBoxNameForBlacklist.Text,
+                (i_List, i_Value) => MessageBox.Show(string.Format("{0} is not in the blacklist!", i_Value)),
+                (i_List, i_Value) =>
                 {
-                    m_appConfig.EventHostBlacklist.Add(nameFromTextbox);
-                    MessageBox.Show(string.Format("{0} was added to the blacklist", nameFromTextbox));
-                }
-                else
-                {
-                    MessageBox.Show(string.Format("{0} is alredy in the blacklist!", nameFromTextbox));
-                }
-                textBoxNameForBlacklist.Text = string.Empty;
-            }
-            else
-            {
-                MessageBox.Show("Can't add a blank name to blacklist!");
-            }
+                    i_List.Add(i_Value);
+                    MessageBox.Show(string.Format("{0} was removed from the blacklist", i_Value));
+                },
+                (i_List, i_Value) => MessageBox.Show("Can't remove a blank name to blacklist!"));
         }
 
     }

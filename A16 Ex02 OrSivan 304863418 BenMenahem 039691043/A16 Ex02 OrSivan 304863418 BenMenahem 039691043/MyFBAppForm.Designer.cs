@@ -40,6 +40,7 @@
             this.ButtonPostStatus = new System.Windows.Forms.Button();
             this.tabControlFBFeatures = new System.Windows.Forms.TabControl();
             this.tabPagePost = new System.Windows.Forms.TabPage();
+            this.buttonClearBlacklist = new System.Windows.Forms.Button();
             this.textBoxNameForBlacklist = new System.Windows.Forms.TextBox();
             this.buttonRemoveFromBlacklist = new System.Windows.Forms.Button();
             this.buttonAddToBlacklist = new System.Windows.Forms.Button();
@@ -180,6 +181,7 @@
             // tabPagePost
             // 
             this.tabPagePost.AutoScroll = true;
+            this.tabPagePost.Controls.Add(this.buttonClearBlacklist);
             this.tabPagePost.Controls.Add(this.textBoxNameForBlacklist);
             this.tabPagePost.Controls.Add(this.buttonRemoveFromBlacklist);
             this.tabPagePost.Controls.Add(this.buttonAddToBlacklist);
@@ -197,6 +199,16 @@
             this.tabPagePost.Text = "Post";
             this.tabPagePost.UseVisualStyleBackColor = true;
             // 
+            // buttonClearBlacklist
+            // 
+            this.buttonClearBlacklist.Location = new System.Drawing.Point(78, 202);
+            this.buttonClearBlacklist.Name = "buttonClearBlacklist";
+            this.buttonClearBlacklist.Size = new System.Drawing.Size(90, 35);
+            this.buttonClearBlacklist.TabIndex = 13;
+            this.buttonClearBlacklist.Text = "Clear Blacklist";
+            this.buttonClearBlacklist.UseVisualStyleBackColor = true;
+            this.buttonClearBlacklist.Click += new System.EventHandler(this.buttonClearBlacklist_Click);
+            // 
             // textBoxNameForBlacklist
             // 
             this.textBoxNameForBlacklist.Location = new System.Drawing.Point(189, 138);
@@ -212,6 +224,7 @@
             this.buttonRemoveFromBlacklist.TabIndex = 10;
             this.buttonRemoveFromBlacklist.Text = "Remove Name from Blacklist";
             this.buttonRemoveFromBlacklist.UseVisualStyleBackColor = true;
+            this.buttonRemoveFromBlacklist.Click += new System.EventHandler(this.buttonRemoveFromBlacklist_Click);
             // 
             // buttonAddToBlacklist
             // 
@@ -536,5 +549,6 @@
         private System.Windows.Forms.TextBox textBoxNameForBlacklist;
         private System.Windows.Forms.BindingSource fBAppConfigBindingSource;
         private System.Windows.Forms.BindingSource eventHostBlacklistBindingSource;
+        private System.Windows.Forms.Button buttonClearBlacklist;
  }
 }
